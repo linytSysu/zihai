@@ -5,8 +5,8 @@
  */
 
 var app = require('../app');
-//var debug = require('debug')('microblog:server');
-//var http = require('http');
+var debug = require('debug')('zihai:server');
+var http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -15,25 +15,21 @@ var app = require('../app');
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-var server = app.listen(app.get('port'), function() {
-  console.log("Server listening on port " + server.address().port);
-});
-
 /**
  * Create HTTP server.
  */
 
-//var server = http.createServer(app);
+var server = http.createServer(app).listen(port, function() {
+  console.log('Express server listening on port ' + port);
+});
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-//server.listen(port, function() {
-
-//});
-//server.on('error', onError);
-//server.on('listening', onListening);
+//server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.

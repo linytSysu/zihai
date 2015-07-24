@@ -1,8 +1,155 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+	padding: 0;
+	margin: 0;
 }
 
-a {
-  color: #00B7FF;
+body {
+	background-image: url("../images/bg.png");
+}
+
+ul li {
+	list-style: none;
+}
+
+.main {
+	width: 80%;
+	margin: 0 auto;
+}
+
+
+/**********************
+ *  menu
+ **********************/
+
+#menu {
+	float: left;
+	margin-right: 10px;
+}
+
+.menu-tab {
+	padding: 17px !important;
+	text-align: center;
+	background: #3B5998;
+	box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.2);
+	transition: all 0.8s ease-out;
+	-moz-transition: all 0.8s ease-out;
+	-webkit-transition: all 0.8s ease-out;
+	-o-transition: all 0.8s ease-out;
+}
+
+.menu-tab i {
+	width: 42px !important;
+	height: 42px !important;
+	color: #3B5998;
+	font-size: 22px;
+	background: white;
+	text-align: center;
+	border-radius: 21px;
+	line-height: 42px;
+}
+
+.menu-tab:hover {
+	background: white;
+}
+
+.menu-tab:hover i {
+	color: white;
+	background: #3B5998;
+}
+
+
+/**********************
+ *  profil
+ **********************/
+
+#profil {
+	float: left;
+	width: 22%;
+	margin-left: 10px;
+	background: #3B5998;
+}
+
+#prof-pic {
+	width: 150px;
+	height: 150px;
+	margin: 50px auto 0px auto;
+	background-image: url("../images/front.png");
+	border-radius: 75px;
+	border: 10px solid #4C70BA;
+}
+
+.prof-content {
+	width: 80%;
+	color: #839CCF;
+	font-family: "Lato",sans-serif;
+	text-align: center;
+	border-bottom: 1px solid #839CCF; 
+}
+
+#prof-info {
+	margin: 0 auto;
+}
+
+#prof-info h1 {
+	font-size: 30px;
+}
+
+#prof-info p {
+	font-size: 16px;
+}
+
+#prof-desc {
+	margin: 30px auto 0 auto;
+}
+
+#prof-desc p {
+	font-size: 14px;
+}
+
+#prof-social {
+	border-bottom: none;
+	margin: 25px auto 0 auto;
+	margin-bottom: 30px;
+}
+
+#prof-social p {
+	font-size: 14px;
+}
+
+.social-icon {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	border: 1px solid white;
+	margin-left: 5px;
+	margin-top: 5px;
+	transition: all 0.8s ease-out;
+	-moz-transition: all 0.8s ease-out;
+	-webkit-transition: all 0.8s ease-out;
+	-o-transition: all 0.8s ease-out;
+}
+
+.social-icon i {
+	font-size: 30px;
+	color: white;
+	margin-top: 10px;
+}
+
+.social-icon:hover {
+	background: white;
+}
+
+.social-icon:hover i {
+	color: #3B5998;
+}
+
+
+
+/**********************
+ *  content
+ **********************/
+#content {
+	float: left;
+	width: 70%;
+	background: #f00;
 }

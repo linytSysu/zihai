@@ -1,7 +1,38 @@
 doctype html
 html
   head
-    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title 自嗨
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    div.main
+      div#menu
+        ul
+          li.menu-tab
+            i.fa.fa-user
+          li.menu-tab
+            i.fa.fa-briefcase
+          li.menu-tab
+            i.fa.fa-bullhorn
+          li.menu-tab
+            i.fa.fa-envelope
+      div#content
+        block content
+      div#profil
+        div#prof-pic
+        div#prof-info.prof-content
+          h1 林依挺
+          p SUN YAT-SEN UNIVERSITY
+        div#prof-desc.prof-content
+          p Happy coding, happy living and more.
+        div#prof-social.prof-content
+          p My Social Profiles
+          span.social-icon
+            i.fa.fa-weibo
+          span.social-icon
+            i.fa.fa-github
+    script(type='text/javascript', src='/javascripts/jquery-1.11.3.min.js')
+    script(type='text/javascript', src='/javascripts/main.js')

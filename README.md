@@ -1,2 +1,2 @@
 # zihai
-自嗨 My blog
+自嗨

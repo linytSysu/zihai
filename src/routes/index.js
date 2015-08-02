@@ -1,13 +1,17 @@
 var express = require('express');
+var Blog = require('../models/Blog');
 var router = express.Router();
-
-router.use(function(req, res, next) {
-  console.log('%s %s %s', req.method, req.url, req.path);
-  next();
-});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  var blog = new Blog({title:'123'});
+  blog.save(function(err) {
+  	if (err) {
+  		console.log("error");
+  	} else {
+  		console.log("success");
+  	}
+  });
   res.render('index', { title: 'Express' });
 });
 

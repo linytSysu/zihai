@@ -2,7 +2,34 @@ doctype html
 html
   head
     meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
     title 自嗨| My Personal Page
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    div.container
+      div.row
+        div.col-xs-12.col-sm-4.col-md-3.sidebar
+          div.sidebar-header
+            h1
+              a(href='') 自嗨
+            p Lin Yiting's Personal Blog
+          div.about-me
+            a(href='') About Me
+          div.recent-post
+            h1 RECENT POST
+            ul
+              li
+                a(href='') a
+              li
+                a(href='') b
+          div.recent-comment
+            h1 RECENT COMMENT
+            ul
+              li
+                a(href='') a
+              li
+                a(href='') b
+        div.col-xs-12.col-sm-8.col-md-9.content
+          block content

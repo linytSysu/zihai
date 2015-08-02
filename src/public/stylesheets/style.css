@@ -1,8 +1,43 @@
+* {
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif !important;
 }
 
 a {
-  color: #00B7FF;
+  color: #000 !important;
+  text-decoration: none !important;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+.row {
+  padding: 0px;
+  margin: 0px;
+}
+.sidebar {
+  padding-left: 60px;
+}
+.sidebar h1 {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 16px;
+}
+.sidebar-header {
+  margin-top: 100px;
+}
+.sidebar-header h1 {
+  font-weight: bolder;
+  font-size: 25px;
+}
+.content {
+  background-color: rgba(244, 244, 244, 1);
 }

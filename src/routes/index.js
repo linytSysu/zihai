@@ -3,6 +3,7 @@ var Blog = require('../models/Blog');
 var Tag = require('../models/Tag');
 var router = express.Router();
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   Tag.findOne({name: 'hello'}, function(err, obj) {
@@ -82,5 +83,9 @@ router.get('/blog/:name', function(req, res, next) {
 		}
 	});
 });
+
+router.get('/blog-create', function(req, res, next) {
+	res.render('create');
+}); 
 
 module.exports = router;

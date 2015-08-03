@@ -20,10 +20,9 @@ html
           div.recent-post
             h1 RECENT POST
             ul
-              li
-                a(href='') a
-              li
-                a(href='') b
+              each item in blogs
+                li
+                  a(href='/blog/#{item.url}') #{item.title}
           div.recent-comment
             h1 RECENT COMMENT
             ul

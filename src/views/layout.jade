@@ -30,5 +30,10 @@ html
                 a(href='') a
               li
                 a(href='') b
+          div
+            h1 TAGS
+            ul
+              each item in tags
+                li #{item.name}
         div.col-xs-12.col-sm-8.col-md-9.content
           block content

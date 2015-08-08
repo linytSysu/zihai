@@ -6,6 +6,8 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  Tag.find({}).exec(function(err, tags){
+  });
   Tag.findOne({name: 'hello'}, function(err, obj) {
   	if (err) {
   		console.log('error');
@@ -16,7 +18,6 @@ router.get('/', function(req, res, next) {
   				name: 'hello',
   				createDate: date,
   				refTimes: 1,
-  				blogs: []
   			});
   			tag.save(function(err) {
   				if (err) {
@@ -26,7 +27,6 @@ router.get('/', function(req, res, next) {
   		}
   	}
   });
-
   Blog.findOne({title: 'Hello world'}, function(err, obj) {
   	if (err) {
   		console.log('error');
@@ -54,11 +54,18 @@ router.get('/', function(req, res, next) {
 		  }
 	  }
   });
+
+  Blog.find({}).populate({path: 'tags'}).exec(function(err, blogs){
+    console.log(blogs[0].tags[0].name);
+  });
+
   Blog.find({}, function(err, blogs) {
   	if (err) {
   		console.log('error');
   	} else {
-      res.render('index', { title: 'Express', blogs: blogs});
+  		Tag.find({}, function(err, tags) {
+          res.render('index', { blogs: blogs, tags: tags});
+  		});
   	}
   });
 });
@@ -76,7 +83,10 @@ router.get('/blog/:name', function(req, res, next) {
 			  	if (err) {
 			  		console.log('error');
 			  	} else {
-			      res.render('blog', { blogs: blogs, blog: obj});
+			  	  console.log(blogs.length);
+            Tag.find({}, function(err, tags) {
+              res.render('blog', { blogs: blogs, blog: obj, tags: tags});
+            });
 			  	}
 			  });
 			}
@@ -85,7 +95,17 @@ router.get('/blog/:name', function(req, res, next) {
 });
 
 router.get('/blog-create', function(req, res, next) {
-	res.render('create');
-}); 
+	Blog.find({}, function(err, blogs) {
+  	if (err) {
+  		console.log('error');
+  	} else {
+      Tag.find({}, function(err, tags) {
+        console.log('asdhfjashdjkfhaskjhdjfkahsdfladskjhfajlllllllllllllk');
+        console.log(blogs.length);
+        res.render('create', { blogs: blogs, tags: tags});
+      });
+  	}
+  });
+});
 
 module.exports = router;

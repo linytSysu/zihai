@@ -3,10 +3,9 @@ var Blog = require('../models/Blog');
 var Tag = require('../models/Tag');
 var router = express.Router();
 
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  Tag.find({}).exec(function(err, tags){
+  /*Tag.find({}).exec(function(err, tags){
   });
   Tag.findOne({name: 'hello'}, function(err, obj) {
   	if (err) {
@@ -58,13 +57,13 @@ router.get('/', function(req, res, next) {
   Blog.find({}).populate({path: 'tags'}).exec(function(err, blogs){
     console.log(blogs[0].tags[0].name);
   });
-
+*/
   Blog.find({}, function(err, blogs) {
   	if (err) {
   		console.log('error');
   	} else {
   		Tag.find({}, function(err, tags) {
-          res.render('index', { blogs: blogs, tags: tags});
+          res.render('index', { title:'asdf', blogs: blogs, tags: tags});
   		});
   	}
   });

@@ -1,31 +1,32 @@
 extends layout
 
 block content
-  div.row
-    div.col-xs-12.col-sm-4.col-md-3.sidebar
-      div.sidebar-header
-        h1
-          a(href='/') 自嗨
-        p Lin Yiting's Personal Blog
-      div.about-me
-        a(href='') About Me
-      div.recent-post
-        h1 RECENT POST
-        ul
-          each blog in blogs
+  div.container
+    div.row
+      div.col-xs-12.col-sm-4.col-md-3.sidebar
+        div.sidebar-header
+          h1
+            a(href='/') 自嗨
+          p Lin Yiting's Personal Blog
+        div.about-me
+          a(href='') About Me
+        div.recent-post
+          h1 RECENT POST
+          ul
+            each blog in blogs
+              li
+                a(href='/blog/#{blog.url}') #{blog.title}
+        div.recent-comment
+          h1 RECENT COMMENT
+          ul
             li
-              a(href='/blog/#{blog.url}') #{blog.title}
-      div.recent-comment
-        h1 RECENT COMMENT
-        ul
-          li
-            a(href='') a
-          li
-            a(href='') b
-      div
-        h1 TAGS
-        ul
-          each tag in tags
-            li #{tag.name}
-    div.col-xs-12.col-sm-8.col-md-9.content
-      p Welcome to zihai
+              a(href='') a
+            li
+              a(href='') b
+        div
+          h1 TAGS
+          ul
+            each tag in tags
+              li #{tag.name}
+      div.col-xs-12.col-sm-8.col-md-9.content
+        p Welcome to zihai

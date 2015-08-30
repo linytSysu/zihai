@@ -8,6 +8,22 @@ html
     link(rel='stylesheet' href='/stylesheets/font-awesome.min.css')
     link(rel='stylesheet' href='/stylesheets/style.css')
   body
-    block content
+    div.container
+      div.row
+        div.col-xs-12.col-sm-4.col-md-3.sidebar
+          div.sidebar-header
+            h1
+              a(href='/') 自嗨
+            p Lin Yiting's Personal Blog
+          div.about-me
+            a(href='') About Me
+          div.recent-post
+            a(href='/blogs') Blogs
+          div.recent-comment
+            a(href='') Comments
+          div
+            a(href='/tags') Tags
+        div.col-xs-12.col-sm-8.col-md-9.content
+          block content
     script(type='text/javascript' src='/javascripts/jquery-1.11.3.min.js')
     script(type='application/javascript' src='/javascripts/main.js')

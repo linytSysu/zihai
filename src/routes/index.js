@@ -5,111 +5,31 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  /*Tag.find({}).exec(function(err, tags){
-  });
-  Tag.findOne({name: 'hello'}, function(err, obj) {
-    if (err) {
-      console.log('error');
-    } else {
-      if (obj == null) {
-        var date = new Date();
-        var tag = new Tag({
-          name: 'hello',
-          createDate: date,
-          refTimes: 1,
-        });
-        tag.save(function(err) {
-          if (err) {
-            console.log(err);
-          }
-        });
-      }
-    }
-  });
-  Blog.findOne({title: 'Hello world'}, function(err, obj) {
-    if (err) {
-      console.log('error');
-    } else {
-      if (obj == null) {
-        var date1 = new Date();
-        Tag.findOne({name: 'hello'}, function(err, tag) {
-          var blog = new Blog({
-            title: 'Hello world',
-            author: 'Lin Yiting',
-            url: 'hello-world',
-            content: 'Mongoose provides a straight-forward, schema-based solution to modeling your application data and includes built-in type casting, validation, query building, business logic hooks and more, out of the box.',
-            startDate: date1,
-            updateDate: date1,
-            tags: [tag._id]
-          });
-          blog.save(function(err) {
-            if (err) {
-              console.log('error');
-            }
-          });
-        });
-      } else {
-        console.log(obj.url);
-      }
-    }
-  });
+  res.render('index');
+});
 
-  Blog.find({}).populate({path: 'tags'}).exec(function(err, blogs){
-    console.log(blogs[0].tags[0].name);
-  });
-*/
-  Blog.find({}, function(err, blogs) {
+router.get('/blogs', function(req, res, next) {
+  Blog.find({}).populate({path: 'tags'}).exec(function(err, blogs) {
     if (err) {
       console.log('error');
     } else {
-      Tag.find({}, function(err, tags) {
-          res.render('index', { title:'asdf', blogs: blogs, tags: tags});
-      });
+      res.render('blogs', {blogs: blogs});
     }
   });
 });
 
 router.get('/blog/:name', function(req, res, next) {
-  Blog.findOne({url: req.params.name}).populate({path: 'tags'}).exec(function(err, obj) {
+  Blog.findOne({url: req.params.name}).populate({path: 'tags'}).exec(function(err, blog) {
     if (err) {
       console.log('error');
     } else {
-      if (obj == null) {
-        res.redirect('/');
-      } else {
-        Blog.find({}, function(err, blogs) {
-          if (err) {
-            console.log("error");
-          } else {
-            Tag.find({}, function(err, tags) {
-              res.render('blog', { blogs: blogs, blog: obj, tags: tags});
-            });
-          }
-        });
-        // Blog.find({}, function(err, blogs) {
-        //   if (err) {
-        //     console.log('error');
-        //   } else {
-        //     Tag.find({}, function(err, tags) {
-        //       res.render('blog', { blogs: blogs, blog: obj, tags: tags});
-        //     });
-        //   }
-        // });
-      }
+      res.render('blog', { blog: blog });
     }
   });
 });
 
 router.get('/blog-create', function(req, res, next) {
-  Blog.find({}, function(err, blogs) {
-    if (err) {
-      console.log('error');
-    } else {
-      Tag.find({}, function(err, tags) {
-        res.render('create', { blogs: blogs, tags: tags});
-      });
-    }
-  });
+  res.render('create');
 });
 
 router.post('/blog-create', function(req, res, next) {
@@ -175,7 +95,7 @@ router.post('/blog-create', function(req, res, next) {
   });
 });
 
-router.get('/tags', function(req, res, next) {
+router.get('/alltags', function(req, res, next) {
   Tag.find({}, function(err, tags) {
     if (err) {
       console.log('error');
@@ -185,6 +105,20 @@ router.get('/tags', function(req, res, next) {
   });
 });
 
+router.get('/tags', function(req, res, next) {
+  Tag.find({}, function(err, tags) {
+    if (err) {
+      console.log('error');
+    } else {
+      res.render('tags', {tags: tags});
+    }
+  });
+});
+
+router.get('/tag/:name', function(req, res, next) {
+  var tag = req.params.name;
+  res.redirect('/');
+});
 
 module.exports = router;
 
@@ -195,3 +129,8 @@ module.exports = router;
 // 4. 以上三种情形，均可以使用req.param()方法，
 //    所以说req.param()是req.query、req.body、以及req.params
 //    获取参数的三种方式的封装。
+
+
+// Mongoose: the difference between id and _id
+// methods, static methods
+// virtual

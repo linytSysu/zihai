@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  each blog in blogs
+    div
+      a(href='/blog/#{blog.url}')
+        h1 #{blog.title}
+      p #{blog.content}
+      code #{blog.tags[0].name}

@@ -13,4 +13,17 @@ jQuery(document).ready(function($) {
       });
     }
   });
+  highlight();
 });
+
+function highlight() {
+  var codeBlock = $('pre code');
+  console.log(codeBlock.length);
+  for(var i = 0; i < codeBlock.length; i++) {
+    var content = $(codeBlock[i]).text();
+    var lang = content.split('\n')[0];
+    content = content.replace(lang+'\n', '');
+    $(codeBlock[i]).text(content);
+    $(codeBlock[i]).addClass(lang).addClass('railscasts');
+  }
+}

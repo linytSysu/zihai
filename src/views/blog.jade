@@ -1,6 +1,16 @@
 extends layout
 
 block content
-  h1 #{blog.title}
-  p #{blog.content}
-  code #{blog.tags[0].name}
+  div.blog-block
+    a(href='/blog/#{blog.url}')
+      h1 #{blog.title}
+    !{blog.content}
+    span.blog-info
+      <i class="fa fa-tag"></i>
+      each tag in blog.tags
+        a(href='/tag/#{tag.name}')
+          code #{tag.name}
+    span.blog-info
+      a(href='/edit/#{blog.url}') <i class="fa fa-pencil-square-o"></i> Edit
+    span.blog-info
+      <i class="fa fa-calendar"></i> #{blog.updateTime}

@@ -1,4 +1,9 @@
 jQuery(document).ready(function($) {
+  showTags();
+  highlight();
+});
+
+function showTags() {
   $('#show-tags').click(function(event) {
     if ($('#tags_block').length == 0) {
       $.get('/alltags', function(data) {
@@ -13,8 +18,7 @@ jQuery(document).ready(function($) {
       });
     }
   });
-  highlight();
-});
+}
 
 function highlight() {
   var codeBlock = $('pre code');

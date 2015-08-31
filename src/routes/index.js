@@ -28,6 +28,7 @@ router.get('/blog/:name', function(req, res, next) {
     if (err) {
       console.log('error');
     } else {
+      blog.content = markdown.toHTML(blog.content);
       res.render('blog', { blog: blog });
     }
   });

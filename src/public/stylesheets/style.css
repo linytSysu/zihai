@@ -1,23 +1,22 @@
-* {
-}
-
 body {
-  font-family: "Noto Serif", serif !important;
+  font-family: Tahoma, Helvetica, Arial, sans-serif !important;
+  font-size: 12px;
+  line-height: 1.5;
 }
-
-a {
-  color: #000 !important;
-  text-decoration: none !important;
-}
-
 ul {
   list-style: none;
 }
-
+a {
+  color: #000;
+}
+a:hover {
+  text-decoration: none;
+}
 .container {
   width: 100%;
   padding: 0px;
   margin: 0px;
+  background-color: #f1f1f1;
 }
 .row {
   padding: 0px;
@@ -25,19 +24,27 @@ ul {
 }
 .sidebar {
   padding-left: 60px;
+  padding-right: 60px;
+  background-color: #fff;
+  line-height: 2;
 }
-.sidebar h1 {
-  font-weight: bold;
+.sidebar-profile {
+  font-size: 14px;
+}
+.sidebar-profile p {
   color: rgba(0, 0, 0, 0.7);
+}
+.sidebar-link {
+  display: block;
   font-size: 16px;
 }
-.sidebar-header {
-  margin-top: 100px;
+.sidebar-link i {
+  margin-right: 10px;
 }
-.sidebar-header h1 {
-  font-weight: bolder;
-  font-size: 25px;
-}
-.content {
-  background-color: rgba(244, 244, 244, 1);
+
+.blog-block {
+  padding: 20px;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  font-size: 14px;
 }

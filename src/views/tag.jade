@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  each blog in blogs
+    div
+      h1 #{blog.title}
+      p #{blog.content}

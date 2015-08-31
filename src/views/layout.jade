@@ -11,18 +11,17 @@ html
     div.container
       div.row
         div.col-xs-12.col-sm-4.col-md-3.sidebar
-          div.sidebar-header
+          div.sidebar-profile
             h1
               a(href='/') 自嗨
             p Lin Yiting's Personal Blog
-          div.about-me
-            a(href='') About Me
-          div.recent-post
-            a(href='/blogs') Blogs
-          div.recent-comment
-            a(href='') Comments
-          div
-            a(href='/tags') Tags
+          div.sidebar-links
+            a.sidebar-link(href='/') <i class="fa fa-home"></i> Home
+            a.sidebar-link(href='') <i class="fa fa-user"></i> About Me
+            a.sidebar-link(href='/blogs') <i class="fa fa-rss"></i> Blogs
+            a.sidebar-link(href='') <i class="fa fa-comments"></i> Comments
+            a.sidebar-link(href='/tags') <i class="fa fa-tags"></i> Tags
+            //- a.sidebar-link(href='/blog-create') Create a new blog
         div.col-xs-12.col-sm-8.col-md-9.content
           block content
     script(type='text/javascript' src='/javascripts/jquery-1.11.3.min.js')

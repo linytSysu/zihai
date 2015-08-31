@@ -116,8 +116,22 @@ router.get('/tags', function(req, res, next) {
 });
 
 router.get('/tag/:name', function(req, res, next) {
-  var tag = req.params.name;
-  res.redirect('/');
+  var tagName = req.params.name;
+  var blogsArr = new Array();
+  Blog.find({}).populate({path: 'tags'}).exec(function(err, blogs){
+    if (err) {
+      console.log('error');
+    } else {
+      blogs.forEach(function(blog) {
+        blog.tags.forEach(function(tag) {
+          if (tag.name == tagName) {
+            blogsArr.push(blog);
+          }
+        });
+      });
+      res.render('tag', {blogs: blogsArr});
+    }
+  });
 });
 
 module.exports = router;

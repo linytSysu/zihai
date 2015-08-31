@@ -2,4 +2,5 @@ extends layout
 
 block content
   each tag in tags
-    h1 #{tag.name}
+    div
+      a(href='/tag/#{tag.name}') #{tag.name}

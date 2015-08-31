@@ -2,8 +2,10 @@ extends layout
 
 block content
   each blog in blogs
-    div
+    div.blog-block
       a(href='/blog/#{blog.url}')
         h1 #{blog.title}
       p #{blog.content}
-      code #{blog.tags[0].name}
+      each tag in blog.tags
+        a(href='/tag/#{tag.name}')
+          code #{tag.name}

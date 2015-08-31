@@ -3,6 +3,8 @@ var Blog = require('../models/Blog');
 var Tag = require('../models/Tag');
 var router = express.Router();
 
+var markdown = require('markdown').markdown;
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
@@ -13,6 +15,9 @@ router.get('/blogs', function(req, res, next) {
     if (err) {
       console.log('error');
     } else {
+      blogs.forEach(function(blog){
+        blog.content = markdown.toHTML(blog.content);
+      });
       res.render('blogs', {blogs: blogs});
     }
   });
@@ -28,11 +33,21 @@ router.get('/blog/:name', function(req, res, next) {
   });
 });
 
-router.get('/blog-create', function(req, res, next) {
+router.get('/create', function(req, res, next) {
   res.render('create');
 });
 
-router.post('/blog-create', function(req, res, next) {
+router.get('/edit/:name', function(req, res, next) {
+  Blog.findOne({url: req.params.name}).populate({path: 'tags'}).exec(function(err, blog) {
+    if (err) {
+      console.log('error');
+    } else {
+      res.render('edit', { blog: blog });
+    }
+  });
+})
+
+router.post('/create', function(req, res, next) {
   var title = req.param('title');
   var url = req.param('url');
   var content = req.param('content');
@@ -67,7 +82,7 @@ router.post('/blog-create', function(req, res, next) {
               if(err) {
                 console.log(err);
               } else {
-                res.redirect('/');
+                res.redirect('/blog/url');
               }
             });
           }
@@ -87,12 +102,33 @@ router.post('/blog-create', function(req, res, next) {
           if(err) {
             console.log(err);
           } else {
-            res.redirect('/');
+            res.redirect('/blog/url');
           }
         });
       }
     }
   });
+});
+
+router.post('/update', function(req, res, next) {
+  var id = req.body.id;
+  var title = req.body.title;
+  var url = req.body.url;
+  var content = req.body.content;
+  var tagName = req.body.tags;
+  var date = new Date();
+  Tag.findOne({name: tagName}, function(err, tag) {
+    Blog.update({_id: id}, 
+                {$set: {title: title, url: url, content: content, tags: tag.id, updateDate: date}}, 
+                function(err, blog) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect('/blogs');
+      }
+    });
+  });
+  
 });
 
 router.get('/alltags', function(req, res, next) {

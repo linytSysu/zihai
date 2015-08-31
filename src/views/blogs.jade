@@ -5,7 +5,13 @@ block content
     div.blog-block
       a(href='/blog/#{blog.url}')
         h1 #{blog.title}
-      p #{blog.content}
-      each tag in blog.tags
-        a(href='/tag/#{tag.name}')
-          code #{tag.name}
+      !{blog.content}
+      span
+        <i class="fa fa-tag"></i>
+        each tag in blog.tags
+          a(href='/tag/#{tag.name}')
+            code #{tag.name}
+      span
+        a(href='/edit/#{blog.url}') <i class="fa fa-pencil-square-o"></i> Edit
+      span
+        <i class="fa fa-calendar"></i> #{blog.updateDate}

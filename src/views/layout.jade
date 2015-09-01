@@ -4,27 +4,26 @@ html
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
     title 自嗨| My Personal Page
-    link(rel='stylesheet' href='/stylesheets/bootstrap.min.css')
+    //- link(rel='stylesheet' href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet' href='/stylesheets/font-awesome.min.css')
     link(rel='stylesheet' href='/stylesheets/railscasts.css')
     link(rel='stylesheet' href='/stylesheets/style.css')
   body
     div.container
-      div.row
-        div.col-xs-12.col-sm-4.col-md-3.sidebar
-          div.sidebar-profile
-            h1
-              a(href='/') 自嗨
-            p Lin Yiting's Personal Blog
-          div.sidebar-links
-            a.sidebar-link(href='/') <i class="fa fa-home"></i> Home
-            a.sidebar-link(href='') <i class="fa fa-user"></i> About Me
-            a.sidebar-link(href='/blogs') <i class="fa fa-rss"></i> Blogs
-            a.sidebar-link(href='') <i class="fa fa-comments"></i> Comments
-            a.sidebar-link(href='/tags') <i class="fa fa-tags"></i> Tags
-            //- a.sidebar-link(href='/create') Create a new blog
-        div.col-xs-12.col-sm-8.col-md-9.content
-          block content
+      div.sidebar
+        div.sidebar-profile
+          h1
+            a(href='/') 自嗨
+          p Lin Yiting's Personal Blog
+        div.sidebar-links
+          a.sidebar-link(href='/') <i class="fa fa-home"></i> Home
+          a.sidebar-link(href='') <i class="fa fa-user"></i> About Me
+          a.sidebar-link(href='/blogs') <i class="fa fa-rss"></i> Blogs
+          a.sidebar-link(href='') <i class="fa fa-comments"></i> Comments
+          a.sidebar-link(href='/tags') <i class="fa fa-tags"></i> Tags
+          //- a.sidebar-link(href='/create') Create a new blog
+      div.main
+        block content
     script(type='text/javascript' src='/javascripts/jquery-1.11.3.min.js')
     script(type='application/javascript' src='/javascripts/main.js')
     script(type='text/javascript' src='/javascripts/highlight.pack.js')

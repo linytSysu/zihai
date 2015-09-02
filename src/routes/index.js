@@ -49,27 +49,26 @@ router.get('/edit/:name', function(req, res, next) {
 })
 
 router.post('/create', function(req, res, next) {
-  var title = req.param('title');
-  var url = req.param('url');
-  var content = req.param('content');
-  var tags = req.param('tags');
+  var title = req.body.title;
+  var url = req.body.url;
+  var content = req.body.content;
+  var tags = JSON.parse(req.body.tags);
   var date = new Date();
+  
+  var tagsId = new Array();
 
-  Tag.findOne({name: tags}, function(err, obj) {
-    if (err) {
-      console.log('error');
-    } else {
-      if (obj == null) {
-        var date = new Date();
-        var tag = new Tag({
-          name : tags,
-          createDate: date,
-          refTimes: 0
-        });
-        tag.save(function(err, obj) {
-          if (err) {
-            console.log('error');
-          } else {
+  tags.forEach(function(tagName){
+    var tag = new Tag({
+      name: tagName,
+      createDate: date,
+      refTimes: 1
+    });
+    tag.save(function(err, obj) {
+      if (err) {
+        Tag.findOne({name: tagName}, function(err2, obj2) {
+          tagsId.push(obj2._id);
+          // Tag.update({name: tagName}, {$inc: {refTimes: 1}}, function(err3, info){});
+          if (tagName == tags[tags.length-1]) {
             var newBlog = new Blog({
               title     : title,
               author    : 'linyiting',
@@ -77,38 +76,94 @@ router.post('/create', function(req, res, next) {
               content   : content,
               startDate : date,
               updateDate: date,
-              tags      : obj.id
+              tags      : tagsId
             });
             newBlog.save(function(err) {
               if(err) {
                 console.log(err);
               } else {
-                res.redirect('/blog/url');
+                res.redirect('/blog/'+url);
               }
             });
           }
         });
       } else {
-        var date = new Date();
-        var newBlog = new Blog({
-          title     : title,
-          author    : 'linyiting',
-          url       : url,
-          content   : content,
-          startDate : date,
-          updateDate: date,
-          tags      : obj.id
-        });
-        newBlog.save(function(err) {
-          if(err) {
-            console.log(err);
-          } else {
-            res.redirect('/blog/url');
-          }
-        });
+        tagsId.push(obj._id);
+        if (tagName == tags[tags.length-1]) {
+          var newBlog = new Blog({
+            title     : title,
+            author    : 'linyiting',
+            url       : url,
+            content   : content,
+            startDate : date,
+            updateDate: date,
+            tags      : tagsId
+          });
+          newBlog.save(function(err) {
+            if(err) {
+              console.log(err);
+            } else {
+              res.redirect('/blog/'+url);
+            }
+          }); 
+        }
       }
-    }
+    });
   });
+  // Tag.findOne({name: tags[0]}, function(err, obj) {
+  //   if (err) {
+  //     console.log('error');
+  //   } else {
+  //     if (obj == null) {
+  //       var date = new Date();
+  //       var tag = new Tag({
+  //         name : tags[0],
+  //         createDate: date,
+  //         refTimes: 0
+  //       });
+  //       tag.save(function(err, obj) {
+  //         if (err) {
+  //           console.log('error');
+  //         } else {
+  //           var newBlog = new Blog({
+  //             title     : title,
+  //             author    : 'linyiting',
+  //             url       : url,
+  //             content   : content,
+  //             startDate : date,
+  //             updateDate: date,
+  //             tags      : obj.id
+  //           });
+  //           newBlog.save(function(err) {
+  //             if(err) {
+  //               console.log(err);
+  //             } else {
+  //               res.redirect('/blog/'+url);
+  //             }
+  //           });
+  //         }
+  //       });
+  //     } else {
+  //       var date = new Date();
+  //       var newBlog = new Blog({
+  //         title     : title,
+  //         author    : 'linyiting',
+  //         url       : url,
+  //         content   : content,
+  //         startDate : date,
+  //         updateDate: date,
+  //         tags      : obj.id
+  //       });
+  //       newBlog.save(function(err) {
+  //         if(err) {
+  //           console.log(err);
+  //         } else {
+  //           res.redirect('/blog/'+url);
+  //         }
+  //       });
+  //     }
+  //   }
+  // });
 });
 
 router.post('/update', function(req, res, next) {

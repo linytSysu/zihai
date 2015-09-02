@@ -1,19 +1,18 @@
 extends layout
 
 block content
-  form(action='/create' method='post')
-    p 标题
-    input(type='text' name='title')
+  //- form.edit-form(action='/create' method='post')
+  div.edit-form
+    input(id='title' type='text' name='title')
     br
-    p 链接
-    input(type='text' name='url')
+    input(id='url' type='text' name='url')
     br
-    p 内容
-    textarea(type='text' name='content')
+    textarea(id='content' rows='35' cols='100' name='content')
+    //- button.button(type='button') Preview
     br
-    p 标签
-    input(type='text' name='tags')
-    a#show-tags(href='#') choose a tag
+    div#tags-editor
+      span#tags-shower
+      input(id='tags' type='text' name='tags')
+    a(id='show-tags' href='#tags') choose a tag
     br
-    br
-    input(type='submit' value='submit')
+    input.button(id='create-submit' type='button' value='submit')

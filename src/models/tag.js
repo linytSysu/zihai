@@ -6,4 +6,17 @@ TagSchema = new mongoose.Schema ({
 	refTimes: Number,
 });
 
-module.exports = mongoose.model('Tag', TagSchema);
+var Tag = mongoose.model('Tag', TagSchema);
+
+TagSchema.pre('save', function(next) {
+	var self = this;
+    Tag.find({name: self.name}, function(err, objs) {
+    	if (!objs.length) {
+    		next();
+    	} else {
+            next(new Error("Tag exists!"));
+    	}
+    });
+});
+
+module.exports = Tag;

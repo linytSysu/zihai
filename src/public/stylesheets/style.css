@@ -21,14 +21,14 @@ ul {
   width: 100%;
   overflow: hidden;
 }
-/*@media(max-width:767px){
-  .sidebar {
-    width: 100%;
-    }
-  .main {
-    width: 100%;
-  }
-}*/
+pre code {
+  font-size: 1.1em;
+  line-height: 1.5 !important;
+}
+input,textarea,button {
+  padding: 10px;
+}
+
 @media(min-width:1001px){
   .sidebar {
     width: 320px;
@@ -41,7 +41,7 @@ ul {
     width: auto;
     position: absolute;
     right: 0;
-    line-height: 2;
+    line-height: 1.5;
     left: 320px;
     background-color: #f1f1f1;
   }
@@ -58,7 +58,7 @@ ul {
     width: auto;
     position: absolute;
     right: 0;
-    line-height: 2;
+    line-height: 1.5;
     left: 250px;
     background-color: #f1f1f1;
   }
@@ -117,7 +117,7 @@ ul {
   }
   .main {
     width: 100%;
-    line-height: 2;
+    line-height: 1.5;
     overflow: hidden;
     background-color: #f1f1f1;
   }
@@ -155,7 +155,10 @@ ul {
   }
 
 }
-
+.blog-block {
+  word-wrap: break-word; 
+  font-size: 1.2em;
+}
 .blog-infos {
   margin-top: 10px;
 }
@@ -166,4 +169,47 @@ ul {
 }
 .blog-info i {
   margin-right: 0.3em;
+}
+.blog-info a {
+  margin-right: 0.3em;
+}
+.blog-info a:last-child {
+  margin-right: 0;
+}
+
+.edit-form {
+  width: 90%;
+  background-color: #fff;
+  margin: 0 auto;
+}
+.button {
+  background: #5F6D7E none repeat scroll 0% 0%;
+  color: #FFF;
+  border: 0px none;
+}
+
+#tags-editor {
+  width: 70%;
+  border: 1px solid #ccc;
+}
+#tags-editor input {
+  outline: none !important;
+  border: none !important;
+}
+#tags-block {
+  margin-top: 10px;
+}
+.tag-item {
+  padding: 5px;
+  color: #3e6d8e;
+  background-color: #e4edf4;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.added-tag {
+  padding: 5px;
+  color: #3e6d8e;
+  background-color: #e4edf4;
+  margin-right: 5px;
+  cursor: pointer;
 }

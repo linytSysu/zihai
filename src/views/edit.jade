@@ -10,7 +10,7 @@ block content
     input(type='text' name='url' value='#{blog.url}')
     br
     p 内容
-    textarea(type='text' name='content') #{blog.content}
+    textarea(rows='40' cols='50' name='content') #{blog.content}
     br
     p 标签
     input(type='text' name='tags' value='#{blog.tags[0].name}')

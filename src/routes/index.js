@@ -14,7 +14,7 @@ function isAuthenticated(req, res, next) {
 module.exports = function(passport) {
   /* GET home page. */
   router.get('/', function(req, res, next) {
-    return res.render('index');
+    res.render('index');
   });
 
   router.get('/login', function(req, res, next) {
@@ -23,7 +23,7 @@ module.exports = function(passport) {
     //   password: hash('admin')
     // });
     // user.save(function(err, obj) {});
-    return res.render('login');
+    res.render('login');
   });
 
   router.post('/login', passport.authenticate('login', {
@@ -31,167 +31,167 @@ module.exports = function(passport) {
     failureRedirect: '/login'
   }));
 
-  return router.get('/blogs', function(req, res, next) {
+  router.get('/blogs', function(req, res, next) {
     Blog.find({}).populate({path: 'tags'}).exec(function(err, blogs) {
       if (err) {
-        return console.log('error');
+        console.log('error');
       } else {
         blogs.forEach(function(blog){
           blog.content = markdown.toHTML(blog.content);
         });
-        return res.render('blogs', {blogs: blogs});
+        res.render('blogs', {blogs: blogs});
       }
     });
   });
 
-  // router.get('/blog/:name', function(req, res, next) {
-  //   Blog.findOne({url: req.params.name}).populate({path: 'tags'}).exec(function(err, blog) {
-  //     if (err) {
-  //       console.log('error');
-  //     } else {
-  //       blog.content = markdown.toHTML(blog.content);
-  //       res.render('blog', { blog: blog });
-  //     }
-  //   });
-  // });
+  router.get('/blog/:name', function(req, res, next) {
+    Blog.findOne({url: req.params.name}).populate({path: 'tags'}).exec(function(err, blog) {
+      if (err) {
+        console.log('error');
+      } else {
+        blog.content = markdown.toHTML(blog.content);
+        res.render('blog', { blog: blog });
+      }
+    });
+  });
 
-  // router.get('/create', function(req, res, next) {
-  //   res.render('create');
-  // });
+  router.get('/create', function(req, res, next) {
+    res.render('create');
+  });
 
-  // router.get('/edit/:name', function(req, res, next) {
-  //   Blog.findOne({url: req.params.name}).populate({path: 'tags'}).exec(function(err, blog) {
-  //     if (err) {
-  //       console.log('error');
-  //     } else {
-  //       res.render('edit', { blog: blog });
-  //     }
-  //   });
-  // })
+  router.get('/edit/:name', function(req, res, next) {
+    Blog.findOne({url: req.params.name}).populate({path: 'tags'}).exec(function(err, blog) {
+      if (err) {
+        console.log('error');
+      } else {
+        res.render('edit', { blog: blog });
+      }
+    });
+  })
 
-  // router.post('/create', function(req, res, next) {
-  //   var title = req.body.title;
-  //   var url = req.body.url;
-  //   var content = req.body.content;
-  //   var tags = JSON.parse(req.body.tags);
-  //   var date = new Date();
+  router.post('/create', function(req, res, next) {
+    var title = req.body.title;
+    var url = req.body.url;
+    var content = req.body.content;
+    var tags = JSON.parse(req.body.tags);
+    var date = new Date();
     
-  //   var tagsId = new Array();
+    var tagsId = new Array();
 
-  //   tags.forEach(function(tagName){
-  //     var tag = new Tag({
-  //       name: tagName,
-  //       createDate: date,
-  //       refTimes: 1
-  //     });
-  //     tag.save(function(err, obj) {
-  //       if (err) {
-  //         Tag.findOne({name: tagName}, function(err2, obj2) {
-  //           tagsId.push(obj2._id);
-  //           // Tag.update({name: tagName}, {$inc: {refTimes: 1}}, function(err3, info){});
-  //           if (tagName == tags[tags.length-1]) {
-  //             var newBlog = new Blog({
-  //               title     : title,
-  //               author    : 'linyiting',
-  //               url       : url,
-  //               content   : content,
-  //               startDate : date,
-  //               updateDate: date,
-  //               tags      : tagsId
-  //             });
-  //             newBlog.save(function(err) {
-  //               if(err) {
-  //                 console.log(err);
-  //               } else {
-  //                 res.redirect('/blog/'+url);
-  //               }
-  //             });
-  //           }
-  //         });
-  //       } else {
-  //         tagsId.push(obj._id);
-  //         if (tagName == tags[tags.length-1]) {
-  //           var newBlog = new Blog({
-  //             title     : title,
-  //             author    : 'linyiting',
-  //             url       : url,
-  //             content   : content,
-  //             startDate : date,
-  //             updateDate: date,
-  //             tags      : tagsId
-  //           });
-  //           newBlog.save(function(err) {
-  //             if(err) {
-  //               console.log(err);
-  //             } else {
-  //               res.redirect('/blog/'+url);
-  //             }
-  //           }); 
-  //         }
-  //       }
-  //     });
-  //   });
-  // });
+    tags.forEach(function(tagName){
+      var tag = new Tag({
+        name: tagName,
+        createDate: date,
+        refTimes: 1
+      });
+      tag.save(function(err, obj) {
+        if (err) {
+          Tag.findOne({name: tagName}, function(err2, obj2) {
+            tagsId.push(obj2._id);
+            // Tag.update({name: tagName}, {$inc: {refTimes: 1}}, function(err3, info){});
+            if (tagName == tags[tags.length-1]) {
+              var newBlog = new Blog({
+                title     : title,
+                author    : 'linyiting',
+                url       : url,
+                content   : content,
+                startDate : date,
+                updateDate: date,
+                tags      : tagsId
+              });
+              newBlog.save(function(err) {
+                if(err) {
+                  console.log(err);
+                } else {
+                  res.redirect('/blog/'+url);
+                }
+              });
+            }
+          });
+        } else {
+          tagsId.push(obj._id);
+          if (tagName == tags[tags.length-1]) {
+            var newBlog = new Blog({
+              title     : title,
+              author    : 'linyiting',
+              url       : url,
+              content   : content,
+              startDate : date,
+              updateDate: date,
+              tags      : tagsId
+            });
+            newBlog.save(function(err) {
+              if(err) {
+                console.log(err);
+              } else {
+                res.redirect('/blog/'+url);
+              }
+            }); 
+          }
+        }
+      });
+    });
+  });
 
-  // router.post('/update', function(req, res, next) {
-  //   var id = req.body.id;
-  //   var title = req.body.title;
-  //   var url = req.body.url;
-  //   var content = req.body.content;
-  //   var tagName = req.body.tags;
-  //   var date = new Date();
-  //   Tag.findOne({name: tagName}, function(err, tag) {
-  //     Blog.update({_id: id}, 
-  //                 {$set: {title: title, url: url, content: content, tags: tag.id, updateDate: date}}, 
-  //                 function(err, blog) {
-  //       if (err) {
-  //         console.log(err);
-  //       } else {
-  //         res.redirect('/blogs');
-  //       }
-  //     });
-  //   });
+  router.post('/update', function(req, res, next) {
+    var id = req.body.id;
+    var title = req.body.title;
+    var url = req.body.url;
+    var content = req.body.content;
+    var tagName = req.body.tags;
+    var date = new Date();
+    Tag.findOne({name: tagName}, function(err, tag) {
+      Blog.update({_id: id}, 
+                  {$set: {title: title, url: url, content: content, tags: tag.id, updateDate: date}}, 
+                  function(err, blog) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.redirect('/blogs');
+        }
+      });
+    });
     
-  // });
+  });
 
-  // router.get('/alltags', function(req, res, next) {
-  //   Tag.find({}, function(err, tags) {
-  //     if (err) {
-  //       console.log('error');
-  //     } else {
-  //       res.json({tags: tags})
-  //     }
-  //   });
-  // });
+  router.get('/alltags', function(req, res, next) {
+    Tag.find({}, function(err, tags) {
+      if (err) {
+        console.log('error');
+      } else {
+        res.json({tags: tags})
+      }
+    });
+  });
 
-  // router.get('/tags', function(req, res, next) {
-  //   Tag.find({}, function(err, tags) {
-  //     if (err) {
-  //       console.log('error');
-  //     } else {
-  //       res.render('tags', {tags: tags});
-  //     }
-  //   });
-  // });
+  router.get('/tags', function(req, res, next) {
+    Tag.find({}, function(err, tags) {
+      if (err) {
+        console.log('error');
+      } else {
+        res.render('tags', {tags: tags});
+      }
+    });
+  });
 
-  // router.get('/tag/:name', function(req, res, next) {
-  //   var tagName = req.params.name;
-  //   var blogsArr = new Array();
-  //   Blog.find({}).populate({path: 'tags'}).exec(function(err, blogs){
-  //     if (err) {
-  //       console.log('error');
-  //     } else {
-  //       blogs.forEach(function(blog) {
-  //         blog.tags.forEach(function(tag) {
-  //           if (tag.name == tagName) {
-  //             blogsArr.push(blog);
-  //           }
-  //         });
-  //       });
-  //       res.render('tag', {blogs: blogsArr});
-  //     }
-  //   });
-  // });
+  return router.get('/tag/:name', function(req, res, next) {
+    var tagName = req.params.name;
+    var blogsArr = new Array();
+    Blog.find({}).populate({path: 'tags'}).exec(function(err, blogs){
+      if (err) {
+        console.log('error');
+      } else {
+        blogs.forEach(function(blog) {
+          blog.tags.forEach(function(tag) {
+            if (tag.name == tagName) {
+              blogsArr.push(blog);
+            }
+          });
+        });
+        res.render('tag', {blogs: blogsArr});
+      }
+    });
+  });
 }
 
 

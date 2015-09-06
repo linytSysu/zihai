@@ -17,10 +17,6 @@ a:hover {
 ul {
   list-style: none;
 }
-.container {
-  width: 100%;
-  overflow: hidden;
-}
 pre code {
   font-size: 1.1em;
   line-height: 1.5 !important;
@@ -28,22 +24,29 @@ pre code {
 input,textarea,button {
   padding: 10px;
 }
+.container {
+  width: 100%;
+}
 
+.sidebar {
+  line-height: 2;
+  background-color: #5F6D7E;
+}
+.main {
+  line-height: 1.5;
+  background-color: #f1f1f1;
+}
 @media(min-width:1001px){
   .sidebar {
     width: 320px;
     height: 100%;
     position: fixed;
-    line-height: 2;
-    background-color: #5F6D7E;
   }
   .main {
-    width: auto;
     position: absolute;
+    width: auto;
     right: 0;
-    line-height: 1.5;
     left: 320px;
-    background-color: #f1f1f1;
   }
 }
 @media(max-width:1000px) and (min-width: 751px) {
@@ -51,22 +54,21 @@ input,textarea,button {
     width: 250px;
     height: 100%;
     position: fixed;
-    line-height: 2;
-    background-color: #5F6D7E;
   }
   .main {
-    width: auto;
     position: absolute;
+    width: auto;
     right: 0;
-    line-height: 1.5;
     left: 250px;
-    background-color: #f1f1f1;
   }
 }
 
 @media(min-width: 751px) {
   .sidebar a {
     color: #fff;
+  }
+  #menu-button {
+    display: none;
   }
   .sidebar-profile {
     padding-top: 100px;
@@ -112,35 +114,47 @@ input,textarea,button {
 @media(max-width: 750px) {
   .sidebar {
     width: 100%;
-    line-height: 1.5;
-    background-color: #5F6D7E;
   }
   .main {
     width: 100%;
-    line-height: 1.5;
     overflow: hidden;
-    background-color: #f1f1f1;
   }
-
+  #menu-button {
+    position: absolute;
+    right: 5%;
+    color: #fff;
+    font-size: 2em;
+  }
   .sidebar a {
     color: #fff;
   }
   .sidebar-profile {
-    padding-top: 10px;
+    padding-top: 5px;
+    padding-left: 5%;
     width: 100%;
-    text-align: center;
   }
   .sidebar-profile img {
-    width: 120px;
+    display: none;
+    /*width: 120px;
     height: 120px;
     border-radius: 60px;
-    border: 2px solid white;
+    border: 2px solid white;*/
   }
   .sidebar-profile p {
     color: rgba(255, 255, 255, 0.7);
   }
   .sidebar-links {
-    display: none;
+    height: 0px;
+    overflow: hidden;
+  }
+  .sidebar-link {
+    padding-left: 5%;
+    font-size: 1.2em;
+    margin: 0 auto;
+    display: block;
+  }
+  .sidebar-link i {
+    margin-right: 1em;
   }
 
   .blog-block {

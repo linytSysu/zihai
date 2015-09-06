@@ -26,6 +26,11 @@ module.exports = function(passport) {
     res.render('login');
   });
 
+  router.get('/logout', function(req, res, next) {
+    req.logout();
+    res.redirect('/');
+  });
+
   router.post('/login', passport.authenticate('login', {
     successRedirect: '/',
     failureRedirect: '/login'

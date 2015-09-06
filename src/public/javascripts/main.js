@@ -3,6 +3,7 @@ jQuery(document).ready(function($) {
   highlight();
   createSubmit();
   checkTagInput();
+  showMenu();
 });
 
 function showTags() {
@@ -118,4 +119,24 @@ function highlight() {
     $(codeBlock[i]).text(content);
     $(codeBlock[i]).addClass(lang).addClass('railscasts');
   }
+}
+
+function showMenu() {
+  var autoHeight = '170px';
+  var isFinished = true;
+  $('#menu-button').click(function(event) {
+    if ($('.sidebar-links').height() == 0 && isFinished) {
+      isFinished = false;
+      $('.sidebar-links').animate( {height: autoHeight}, 200, function() {
+        isFinished = true;
+        $('#menu-button-icon').removeClass('fa-bars').addClass('fa-remove');
+      });
+    } else if (isFinished) {
+      isFinished = false;
+      $('.sidebar-links').animate({ height: 0}, 200, function() {
+        isFinished = true;
+        $('#menu-button-icon').removeClass('fa-remove').addClass('fa-bars');
+      });
+    }
+  });
 }

@@ -6,13 +6,14 @@ body {
   font-family: Tahoma, Helvetica, Arial, sans-serif !important;
   font-size: 0.9em;
   line-height: 1.5;
+  background-color: #f1f1f1;
 }
 a {
   text-decoration: none;
-  color: #000;
+  color: #006DAF;
 }
 a:hover {
-  color: rgba(0, 0, 0, 0.5);
+  text-decoration: underline;
 }
 ul {
   list-style: none;
@@ -22,7 +23,13 @@ pre code {
   line-height: 1.5 !important;
 }
 input,textarea,button {
-  padding: 10px;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  padding: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1) inset;
+}
+textarea {
+  resize: none;
 }
 .container {
   width: 100%;
@@ -108,7 +115,32 @@ input,textarea,button {
   .blog-block:first-child {
     margin-top: 2em;
   }
+  #comment-form {
+    width: 90%;
+    padding: 1em;
+    margin: 0 auto;
+    margin-bottom: 2em;
+    background-color: rgba(255, 255, 255, 1);
+  }
+  #comment-form input {
+    width: 70%;
+    margin-bottom: 1em;
+  }
+  #comment-form textarea {
+    width: 70%;
+    margin-bottom: 1em;
+  }
+  input#comment-submit {
+    width: 10%;
+  }
 
+  input#title, input#url {
+    width: 30%;
+    margin-bottom: 20px;
+  }
+  input#title {
+    margin-right: 5%;
+  }
 }
 
 @media(max-width: 750px) {
@@ -131,14 +163,9 @@ input,textarea,button {
   .sidebar-profile {
     padding-top: 5px;
     padding-left: 5%;
-    width: 100%;
   }
   .sidebar-profile img {
     display: none;
-    /*width: 120px;
-    height: 120px;
-    border-radius: 60px;
-    border: 2px solid white;*/
   }
   .sidebar-profile p {
     color: rgba(255, 255, 255, 0.7);
@@ -193,8 +220,9 @@ input,textarea,button {
 
 .edit-form {
   width: 90%;
+  margin: 2em auto 0 auto;
+  padding: 10px;
   background-color: #fff;
-  margin: 0 auto;
 }
 .button {
   background: #5F6D7E none repeat scroll 0% 0%;
@@ -203,12 +231,16 @@ input,textarea,button {
 }
 
 #tags-editor {
+  padding: 8px;
   width: 70%;
   border: 1px solid #ccc;
 }
 #tags-editor input {
+  width: 100%;
+  padding: 0;
   outline: none !important;
   border: none !important;
+  box-shadow: none !important;
 }
 #tags-block {
   margin-top: 10px;

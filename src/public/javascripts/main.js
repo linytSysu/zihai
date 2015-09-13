@@ -2,6 +2,7 @@ jQuery(document).ready(function($) {
   showTags();
   highlight();
   createSubmit();
+  commentSubmit();
   checkTagInput();
   showMenu();
 });
@@ -42,6 +43,8 @@ function checkTagInput() {
       if ($('#tags').val() !== '' && $('#tags').val() !== ' ') {
         if ( tagCanAdded($('#tags').val()) ) {
           $('#tags-shower').append("<span class='added-tag'>"+$('#tags').val()+"</span>");
+          $('#tags').val('');
+          $('#tags').width($('#tags-editor').width()-$('#tags-shower').width()-10);
         }
       } else {
         $('#tags').val('');
@@ -52,14 +55,16 @@ function checkTagInput() {
         var last = $('#tags-shower').children('span').last();
         $('#tags').val(last.text());
         last.remove();
+        var w = $('#tags-shower').width();
+        $('#tags').width($('#tags-editor').width()-$('#tags-shower').width()-10);
       }
     }
   });
-  $('#tags').keyup(function(event) {
-    if (event.keyCode == 13 || event.keyCode == 32) {
-      $('#tags').val('');
-    }
-  });
+  // $('#tags').keyup(function(event) {
+  //   if (event.keyCode == 13 || event.keyCode == 32) {
+  //     $('#tags').val('');
+  //   }
+  // });
 }
 function getAddedTagsNumber() {
   return $('#tags-shower').children('span').length;
@@ -105,6 +110,30 @@ function createSubmit() {
       },
       success: function(data){
         // console.log(data);
+      }
+    });
+  });
+}
+
+function commentSubmit() {
+  $('#comment-submit').click(function(event) {
+    var id = $('input[name="id"]').val();
+    var name = $('#name').val();
+    var email = $('#email').val();
+    var website = $('#website').val();
+    var content = $('#content').val();
+    $.ajax({
+      url: '/comment',
+      type: 'POST',
+      data: {
+        id : id,
+        name: name,
+        email: email,
+        website: website,
+        content: content
+      },
+      success: function(date) {
+        console.log("hello wolrd");
       }
     });
   });

@@ -11,6 +11,19 @@ block content
         a(href='/tag/#{tag.name}')
           code #{tag.name}
     span.blog-info
-      a(href='/edit/#{blog.url}') <i class="fa fa-pencil-square-o"></i> Edit
+      <i class="fa fa-pencil-square-o"></i>
+      a(href='/edit/#{blog.url}') Edit
     span.blog-info
       <i class="fa fa-calendar"></i> #{blog.updateTime}
+  div.comments-block
+  form#comment-form
+    input(type='hidden' name='id' value='#{blog._id}')
+    input(id='name' name='name' placeholder='Name')
+    br
+    input(id='email' name='email' placeholder='Email')
+    br
+    input(id='website' name='website' placeholder='Website')
+    br
+    textarea(id='content' name='content' rows='15' placeholder='Comment')
+    br
+    input.button(id='comment-submit' type='button' value='submit')

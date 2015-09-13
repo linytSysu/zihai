@@ -3,11 +3,10 @@ extends layout
 block content
   //- form.edit-form(action='/create' method='post')
   div.edit-form
-    input(id='title' type='text' name='title')
+    input(id='title' type='text' name='title' placeholder='标题')
+    input(id='url' type='text' name='url' placeholder='url')
     br
-    input(id='url' type='text' name='url')
-    br
-    textarea(id='content' rows='35' cols='100' name='content')
+    textarea(id='content' name='content' rows='30' placeholder='content')
     //- button.button(type='button') Preview
     br
     div#tags-editor

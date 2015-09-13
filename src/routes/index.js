@@ -1,6 +1,7 @@
 var express = require('express');
 var Blog = require('../models/Blog');
 var Tag = require('../models/Tag');
+var Comment = require('../models/Comment');
 var User = require('../models/User');
 var router = express.Router();
 var markdown = require('markdown').markdown;
@@ -72,7 +73,7 @@ module.exports = function(passport) {
         res.render('edit', { blog: blog });
       }
     });
-  })
+  });
 
   router.post('/create', function(req, res, next) {
     var title = req.body.title;
@@ -179,7 +180,7 @@ module.exports = function(passport) {
     });
   });
 
-  return router.get('/tag/:name', function(req, res, next) {
+  router.get('/tag/:name', function(req, res, next) {
     var tagName = req.params.name;
     var blogsArr = new Array();
     Blog.find({}).populate({path: 'tags'}).exec(function(err, blogs){
@@ -196,6 +197,28 @@ module.exports = function(passport) {
         res.render('tag', {blogs: blogsArr});
       }
     });
+  });
+
+  router.post('/comment', function(req, res, next) {
+    var id = req.body.id;
+    var name = req.body.name;
+    var email = req.body.email;
+    var website = req.body.website;
+    var content = req.body.content;
+    var date = new Date();
+    Comment.create({name: name,
+                    email: email,
+                    website: website,
+                    content: content,
+                    createDate: date,
+                    updateDate: date,
+                    target_blog: [id],
+                    target_comment: []
+                  }, function(obj, err) {
+                    console.log("hello world");
+                  });
+  });
+  return router.get('/comments', function(req, res, next) {
   });
 }
 

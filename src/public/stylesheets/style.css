@@ -115,32 +115,6 @@ textarea {
   .blog-block:first-child {
     margin-top: 2em;
   }
-  #comment-form {
-    width: 90%;
-    padding: 1em;
-    margin: 0 auto;
-    margin-bottom: 2em;
-    background-color: rgba(255, 255, 255, 1);
-  }
-  #comment-form input {
-    width: 70%;
-    margin-bottom: 1em;
-  }
-  #comment-form textarea {
-    width: 70%;
-    margin-bottom: 1em;
-  }
-  input#comment-submit {
-    width: 10%;
-  }
-
-  input#title, input#url {
-    width: 30%;
-    margin-bottom: 20px;
-  }
-  input#title {
-    margin-right: 5%;
-  }
 }
 
 @media(max-width: 750px) {
@@ -258,4 +232,56 @@ textarea {
   background-color: #e4edf4;
   margin-right: 5px;
   cursor: pointer;
+}
+
+
+.comments-block {
+  width: 90%;
+  padding: 1em;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  background-color: rgba(255, 255, 255, 1);
+}
+.comment-block {
+  border-top: 1px solid #ddd;
+}
+.comment-name {
+  display: inline;
+  font-weight: bold;
+}
+.comment-time {
+  display: inline;
+  float: right;
+  color: #666;
+}
+.comment-cancel-button {
+  cursor: pointer;
+  float: right;
+}
+
+#comment-form {
+  width: 90%;
+  padding: 1em;
+  margin: 0 auto;
+  margin-bottom: 2em;
+  background-color: rgba(255, 255, 255, 1);
+}
+#comment-form input {
+  width: 70%;
+  margin-bottom: 1em;
+}
+#comment-form textarea {
+  width: 70%;
+  margin-bottom: 1em;
+}
+input#comment-submit {
+  width: 10%;
+}
+
+input#title, input#url {
+  width: 30%;
+  margin-bottom: 20px;
+}
+input#title {
+  margin-right: 5%;
 }

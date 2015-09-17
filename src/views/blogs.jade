@@ -1,10 +1,6 @@
 extends layout
 
 block content
-  //- - var i = 0
-  //- - for (; i < 10;)
-  //-   p #{i}
-  //-   - i++
   each blog in blogs
     div.blog-block
       a(href='/blog/#{blog.url}')
@@ -12,12 +8,15 @@ block content
       !{blog.content}
       div.blog-infos
         span.blog-info
-          <i class="fa fa-tag"></i>
+          i.fa.fa-tag
           each tag in blog.tags
             a(href='/tag/#{tag.name}')
               code #{tag.name}
         span.blog-info
-          <i class="fa fa-pencil-square-o"></i>
+          i.fa.fa-pencil-square-o
           a(href='/edit/#{blog.url}') Edit
         span.blog-info
-          <i class="fa fa-calendar"></i> #{blog.updateTime}
+          i.fa.fa-calendar #{blog.updateTime}
+        span.blog-info
+          i.fa.fa-comments 
+          a(href='/blog/#{blog.url}') #{blog.comments.length} comments

@@ -7,8 +7,8 @@ CommentSchema = new mongoose.Schema ({
 	content: String,
 	createDate: Date,
 	updateDate: Date,
-	target_blog: [{type: mongoose.Schema.Types.ObjectId, ref: 'Blog'}],
-	target_commet: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
+	targetBlog: {type: mongoose.Schema.Types.ObjectId, ref: 'Blog'},
+  childrenComment: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
 CommentSchema.virtual('updateTime').get(function() {

@@ -8,7 +8,6 @@ BlogSchema = new mongoose.Schema ({
 	startDate: Date,
 	updateDate: Date,
 	tags: [{type: mongoose.Schema.Types.ObjectId, ref: 'Tag'}],
-  comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
 BlogSchema.virtual('updateTime').get(function() {

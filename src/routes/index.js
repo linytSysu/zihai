@@ -51,15 +51,16 @@ module.exports = function(passport) {
   });
 
   router.get('/blog/:name', function(req, res, next) {
-    Blog.findOne({url: req.params.name}).populate({path: 'tags'}).populate({path: 'comments'})
-     .exec(function(err, blog) {
+    Blog.findOne({url: req.params.name}).populate({path: 'tags'}).exec(function(err, blog) {
       if (err) {
         console.log('error');
       } else {
         if (blog) {
           blog.content = markdown.toHTML(blog.content);
+          Comment.find({targetBlog: blog._id}).populate({path: 'childrenComment'}).exec(function(err, comments) {
+            res.render('blog', { blog: blog, comments: comments});
+          });
         }
-        res.render('blog', { blog: blog });
       }
     });
   });
@@ -69,8 +70,7 @@ module.exports = function(passport) {
   });
 
   router.get('/edit/:name', function(req, res, next) {
-    Blog.findOne({url: req.params.name}).populate({path: 'tags'}).populate({path: 'comments'})
-        .exec(function(err, blog) {
+    Blog.findOne({url: req.params.name}).populate({path: 'tags'}).exec(function(err, blog) {
       if (err) {
         console.log('error');
       } else {
@@ -108,7 +108,6 @@ module.exports = function(passport) {
                 startDate : date,
                 updateDate: date,
                 tags      : tagsId,
-                comments  : []
               });
               newBlog.save(function(err) {
                 if(err) {
@@ -130,7 +129,6 @@ module.exports = function(passport) {
               startDate : date,
               updateDate: date,
               tags      : tagsId,
-              comments  : []
             });
             newBlog.save(function(err) {
               if(err) {
@@ -206,25 +204,36 @@ module.exports = function(passport) {
   });
 
   router.post('/comment', function(req, res, next) {
-    var target_blog = req.body.target_blog;
+    var targetBlog = req.body.targetBlog;
+    var targetComment = req.body.targetComment;
     var name = req.body.name;
     var email = req.body.email;
     var website = req.body.website;
     var content = req.body.content;
     var date = new Date();
-    Comment.create({name: name,
-                    email: email,
-                    website: website,
-                    content: content,
-                    createDate: date,
-                    updateDate: date,
-                    target_blog: [target_blog],
-                    target_comment: []
-                  }, function(err, obj) {
-                    Blog.findOneAndUpdate({_id: id}, {$push: {comments: obj._id}}, function(err, obj) {
-                    });
-                  });
+
+    Comment.create(
+      {name: name,
+       email: email,
+       website: website,
+       content: content,
+       createDate: date,
+       updateDate: date,
+       targetBlog: targetBlog,
+       childrenComment: []
+      },
+      function(err, obj) {
+        if (err) {
+          console.log(err);
+        } else {
+          Comment.findOneAndUpdate({_id: targetComment}, {$push: {childrenComment: obj._id}}, function(err, obj2) {
+            console.log(obj2);
+          });
+        }
+      }
+    );
   });
+
   router.get('/comment/:hello?', function(req, res, next) {
     console.log(req.query.hello);
   });

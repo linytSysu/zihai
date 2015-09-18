@@ -242,6 +242,9 @@ textarea {
   margin-bottom: 1em;
   background-color: rgba(255, 255, 255, 1);
 }
+.comments-block ul {
+  padding-left: 2em;
+}
 .comment-block {
   border-top: 1px solid #ddd;
 }

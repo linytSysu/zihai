@@ -118,6 +118,8 @@ function createSubmit() {
 function commentSubmit() {
   $('#comment-submit').click(function(event) {
     var target_blog = $('input[name="target_blog"]').val();
+    var parent_comment = $('input[name="parent_comment"]').val();
+    console.log(parent_comment);
     var name = $('#name').val();
     var email = $('#email').val();
     var website = $('#website').val();
@@ -126,7 +128,8 @@ function commentSubmit() {
       url: '/comment',
       type: 'POST',
       data: {
-        target_blog : target_blog,
+        targetBlog : target_blog,
+        targetComment: parent_comment,
         name: name,
         email: email,
         website: website,
@@ -175,8 +178,11 @@ function moveForm(para) {
   // console.log($('.comment-cancel-button').length);
   $('#'+para).append($('#comment-form'));
   $('#comment-form').prepend('<span class="comment-cancel-button"><i class="fa fa-remove"></i></span>');
+  $('input[name="parent_comment"]').val(para);
+
   $('.comment-cancel-button').click(function(event) {
     $('.comment-cancel-button').remove();
     $('.main').append($('#comment-form'));
+    $('input[name="parent_comment"]').val('');
   });
 }

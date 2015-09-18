@@ -16,16 +16,20 @@ block content
       <i class="fa fa-calendar"></i> #{blog.updateTime}
     !{blog.content}
   div.comments-block
-    ul
-      each comment in blog.comments
-        li.comment-block(id='#{comment._id}')
-          div.comment-name #{comment.name}
-          div.comment-time #{comment.updateTime}
-          div.comment-content !{comment.content}
-          a.comment-reply(href='#' onclick='moveForm("#{comment._id}"); return false;') Reply
+    mixin comment_list(comments)
+      ul
+        each comment in comments
+          li.comment-block(id='#{comment._id}')
+            div.comment-name #{comment.name}
+            div.comment-time #{comment.updateTime}
+            div.comment-content !{comment.content}
+            a.comment-reply(href='#' onclick='moveForm("#{comment._id}"); return false;') Reply
+            if comment.childrenComment
+              mixin comment_list(comment.childrenComment)
+    +comment_list(comments)
   form#comment-form
     input(type='hidden' name='target_blog' value='#{blog._id}')
-    input(type='hidden' name='parent_comment' value='')
+    input(type='hidden' name='parent_comment')
     input(id='name' name='name' placeholder='Name')
     br
     input(id='email' name='email' placeholder='Email')

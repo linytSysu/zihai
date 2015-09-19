@@ -1,15 +1,22 @@
 var mongoose = require('mongoose');
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 CommentSchema = new mongoose.Schema ({
-	name: String,
-	email: String,
-	website: String,
-	content: String,
-	createDate: Date,
-	updateDate: Date,
-	targetBlog: {type: mongoose.Schema.Types.ObjectId, ref: 'Blog'},
+  name: String,
+  email: String,
+  website: String,
+  content: String,
+  level: Number,
+  createDate: Date,
+  updateDate: Date,
+  targetBlog: {type: mongoose.Schema.Types.ObjectId, ref: 'Blog'},
   childrenComment: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
+
+CommentSchema.plugin(deepPopulate, {
+  populate: [
+    'comments.childrenComment'
+  ]});
 
 CommentSchema.virtual('updateTime').get(function() {
   var month, date, hour, minute;

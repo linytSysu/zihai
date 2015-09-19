@@ -57,8 +57,14 @@ module.exports = function(passport) {
       } else {
         if (blog) {
           blog.content = markdown.toHTML(blog.content);
-          Comment.find({targetBlog: blog._id}).populate({path: 'childrenComment'}).exec(function(err, comments) {
-            res.render('blog', { blog: blog, comments: comments});
+          Comment.findOne().sort({level: -1}).exec(function(err, doc) {
+            var deep = 'childrenComment';
+            for (var i = 1; i < doc.level; i++) {
+              deep = deep.concat('.childrenComment');
+            }
+            Comment.find({targetBlog: blog._id, level: 0}).deepPopulate(deep).exec(function(err, comments) {
+              res.render('blog', { blog: blog, comments: comments});
+            });
           });
         }
       }
@@ -211,9 +217,13 @@ module.exports = function(passport) {
     var website = req.body.website;
     var content = req.body.content;
     var date = new Date();
-
+    var level = 0;
+    if (targetComment) {
+      level = 1;
+    }
     Comment.create(
       {name: name,
+       level: level,
        email: email,
        website: website,
        content: content,
@@ -227,7 +237,10 @@ module.exports = function(passport) {
           console.log(err);
         } else {
           Comment.findOneAndUpdate({_id: targetComment}, {$push: {childrenComment: obj._id}}, function(err, obj2) {
-            console.log(obj2);
+            if (obj2) {
+              Comment.findOneAndUpdate({_id: obj._id}, {$set: {level: obj2.level+1}}, function() {
+              });
+            }
           });
         }
       }

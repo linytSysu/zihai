@@ -12,9 +12,9 @@ block content
           each tag in blog.tags
             a(href='/tag/#{tag.name}')
               code #{tag.name}
-        span.blog-info
-          i.fa.fa-pencil-square-o
-          a(href='/edit/#{blog.url}') Edit
+        //- span.blog-info
+        //-   i.fa.fa-pencil-square-o
+        //-   a(href='/edit/#{blog.url}') Edit
         span.blog-info
           i.fa.fa-calendar #{blog.updateTime}
         //- span.blog-info

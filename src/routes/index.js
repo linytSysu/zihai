@@ -8,7 +8,9 @@ var markdown = require('markdown').markdown;
 
 function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    return next();
+    next();
+  } else {
+    res.redirect('/login');
   }
 }
 
@@ -63,7 +65,7 @@ module.exports = function(passport) {
               deep = deep.concat('.childrenComment');
             }
             Comment.find({targetBlog: blog._id, level: 0}).deepPopulate(deep).exec(function(err, comments) {
-              res.render('blog', { blog: blog, comments: comments});
+              res.render('blog', { blog: blog, comments: comments, user: req.user});
             });
           });
         }
@@ -71,11 +73,11 @@ module.exports = function(passport) {
     });
   });
 
-  router.get('/create', function(req, res, next) {
+  router.get('/create',  isAuthenticated, function(req, res, next) {
     res.render('create');
   });
 
-  router.get('/edit/:name', function(req, res, next) {
+  router.get('/edit/:name',  isAuthenticated, function(req, res, next) {
     Blog.findOne({url: req.params.name}).populate({path: 'tags'}).exec(function(err, blog) {
       if (err) {
         console.log('error');
@@ -85,7 +87,7 @@ module.exports = function(passport) {
     });
   });
 
-  router.post('/create', function(req, res, next) {
+  router.post('/create',  isAuthenticated, function(req, res, next) {
     var title = req.body.title;
     var url = req.body.url;
     var content = req.body.content;
@@ -149,7 +151,7 @@ module.exports = function(passport) {
     });
   });
 
-  router.post('/update', function(req, res, next) {
+  router.post('/update',  isAuthenticated, function(req, res, next) {
     var id = req.body.id;
     var title = req.body.title;
     var url = req.body.url;

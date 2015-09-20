@@ -9,9 +9,10 @@ block content
       each tag in blog.tags
         a(href='/tag/#{tag.name}')
           code #{tag.name}
-    span.blog-info
-      <i class="fa fa-pencil-square-o"></i>
-      a(href='/edit/#{blog.url}') Edit
+    if user
+      span.blog-info
+        <i class="fa fa-pencil-square-o"></i>
+        a(href='/edit/#{blog.url}') Edit
     span.blog-info
       <i class="fa fa-calendar"></i> #{blog.updateTime}
     !{blog.content}
@@ -20,10 +21,11 @@ block content
       ul
         each comment in comments
           li.comment-block(id='#{comment._id}')
-            div.comment-name #{comment.name}
-            div.comment-time #{comment.updateTime}
-            div.comment-content !{comment.content}
-            a.comment-reply(href='#' onclick='moveForm("#{comment._id}"); return false;') Reply
+            div
+              div.comment-name #{comment.name}
+              div.comment-time #{comment.updateTime}
+              div.comment-content !{comment.content}
+              a.comment-reply(href='#' onclick='moveForm("#{comment._id}"); return false;') Reply
             if comment.childrenComment
               mixin comment_list(comment.childrenComment)
     +comment_list(comments)

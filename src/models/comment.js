@@ -16,7 +16,8 @@ CommentSchema = new mongoose.Schema ({
 CommentSchema.plugin(deepPopulate, {
   populate: [
     'comments.childrenComment'
-  ]});
+  ]
+});
 
 CommentSchema.virtual('updateTime').get(function() {
   var month, date, hour, minute;

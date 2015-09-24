@@ -6,6 +6,7 @@ body {
   font-family: Tahoma, Helvetica, Arial, sans-serif !important;
   font-size: 0.9em;
   line-height: 1.5;
+  /*background-image: url('../images/bg1.png');*/
   background-color: #f1f1f1;
 }
 a {
@@ -37,11 +38,12 @@ textarea {
 
 .sidebar {
   line-height: 2;
-  background-color: #5F6D7E;
+  background-image: url('../images/bg5.png');
+  /*background-color: rgba(0, 0, 0, 0.7);*/
 }
 .main {
   line-height: 1.5;
-  background-color: #f1f1f1;
+  /*background-color: #f1f1f1;*/
 }
 @media(min-width:1001px){
   .sidebar {
@@ -243,7 +245,7 @@ textarea {
   background-color: rgba(255, 255, 255, 1);
 }
 .comments-block ul {
-  padding-left: 2em;
+  padding-left: 3em;
 }
 .comments-block ul:first-child {
   padding-left: 0;
@@ -258,8 +260,8 @@ textarea {
   margin-right: 15px;
   width: 50px;
   height: 50px;
-  border-radius: 25px;
-  border: 1px solid #ddd;
+  /*border-radius: 25px;*/
+  /*border: 1px solid #ddd;*/
 }
 .comment-name {
   font-weight: bold;

@@ -119,7 +119,6 @@ function commentSubmit() {
   $('#comment-submit').click(function(event) {
     var target_blog = $('input[name="target_blog"]').val();
     var parent_comment = $('input[name="parent_comment"]').val();
-    console.log(parent_comment);
     var name = $('#name').val();
     var email = $('#email').val();
     var website = $('#website').val();
@@ -135,8 +134,8 @@ function commentSubmit() {
         website: website,
         content: content
       },
-      success: function(date) {
-        console.log("hello wolrd");
+      success: function(data) {
+        location.reload();
       }
     });
   });
@@ -176,7 +175,9 @@ function showMenu() {
 function moveForm(para) {
   $('.comment-cancel-button').remove();
   // console.log($('.comment-cancel-button').length);
-  $('#'+para).append($('#comment-form'));
+  // $('#'+para).append($('#comment-form'));
+  // console.log();
+  $('#comment-form').insertAfter($('#'+para+' .comment-self')[0]);
   $('#comment-form').prepend('<span class="comment-cancel-button"><i class="fa fa-remove"></i></span>');
   $('input[name="parent_comment"]').val(para);
 

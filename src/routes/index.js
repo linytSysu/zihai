@@ -5,6 +5,7 @@ var Comment = require('../models/Comment');
 var User = require('../models/User');
 var router = express.Router();
 var markdown = require('markdown').markdown;
+var md5 = require('md5');
 
 function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -17,7 +18,16 @@ function isAuthenticated(req, res, next) {
 module.exports = function(passport) {
   /* GET home page. */
   router.get('/', function(req, res, next) {
-    res.render('index');
+    Blog.find({}).populate({path: 'tags'}).exec(function(err, blogs) {
+      if (err) {
+        console.log('error');
+      } else {
+        blogs.forEach(function(blog){
+          blog.content = markdown.toHTML(blog.content);
+        });
+        res.render('index', {blogs: blogs});
+      }
+    });
   });
 
   router.get('/login', function(req, res, next) {
@@ -61,12 +71,15 @@ module.exports = function(passport) {
           blog.content = markdown.toHTML(blog.content);
           Comment.findOne().sort({level: -1}).exec(function(err, doc) {
             var deep = 'childrenComment';
-            for (var i = 1; i < doc.level; i++) {
-              deep = deep.concat('.childrenComment');
+            if (doc) {
+              for (var i = 1; i < doc.level; i++) {
+                deep = deep.concat('.childrenComment');
+              }
             }
             Comment.find({targetBlog: blog._id, level: 0}).deepPopulate(deep).exec(function(err, comments) {
               res.render('blog', { blog: blog, comments: comments, user: req.user});
             });
+
           });
         }
       }
@@ -226,7 +239,7 @@ module.exports = function(passport) {
     Comment.create(
       {name: name,
        level: level,
-       email: email,
+       email: md5(email),
        website: website,
        content: content,
        createDate: date,
@@ -241,6 +254,7 @@ module.exports = function(passport) {
           Comment.findOneAndUpdate({_id: targetComment}, {$push: {childrenComment: obj._id}}, function(err, obj2) {
             if (obj2) {
               Comment.findOneAndUpdate({_id: obj._id}, {$set: {level: obj2.level+1}}, function() {
+                res.send('hello world');
               });
             }
           });
@@ -248,11 +262,8 @@ module.exports = function(passport) {
       }
     );
   });
-
-  router.get('/comment/:hello?', function(req, res, next) {
-    console.log(req.query.hello);
-  });
-  return router.get('/comments', function(req, res, next) {
+  return router.get('/admin', function(req, res, next) {
+    
   });
 }
 

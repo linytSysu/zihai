@@ -1,4 +1,22 @@
 extends layout
 
 block content
-  p Welcome to zihai
+  each blog in blogs
+    div.blog-block
+      a(href='/blog/#{blog.url}')
+        h1 #{blog.title}
+      !{blog.content}
+      div.blog-infos
+        span.blog-info
+          i.fa.fa-tag
+          each tag in blog.tags
+            a(href='/tag/#{tag.name}')
+              code #{tag.name}
+        //- span.blog-info
+        //-   i.fa.fa-pencil-square-o
+        //-   a(href='/edit/#{blog.url}') Edit
+        span.blog-info
+          <i class='fa fa-calendar'></i> #{blog.updateTime}
+        //- span.blog-info
+        //-   i.fa.fa-comments 
+        //-   a(href='/blog/#{blog.url}') #{blog.comments.length} comments

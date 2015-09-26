@@ -5,7 +5,6 @@ block content
     div.blog-block
       a(href='/blog/#{blog.url}')
         h1 #{blog.title}
-      !{blog.content}
       div.blog-infos
         span.blog-info
           i.fa.fa-tag
@@ -20,3 +19,4 @@ block content
         //- span.blog-info
         //-   i.fa.fa-comments 
         //-   a(href='/blog/#{blog.url}') #{blog.comments.length} comments
+      !{blog.content}

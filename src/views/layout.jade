@@ -7,27 +7,30 @@ html
     //- link(rel='stylesheet' href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet' href='/stylesheets/font-awesome.min.css')
     link(rel='stylesheet' href='/stylesheets/railscasts.css')
+    link(rel='stylesheet' href='/stylesheets/monokai_sublime.css')
     link(rel='stylesheet' href='/stylesheets/style.css')
   body
-    div.container
-      div.sidebar
+    div.header
+      div.wrap
         div#menu-button
           <i id="menu-button-icon" class="fa fa-bars"></i>
-        div.sidebar-profile
-          //- div
-          img(src='/images/profile.jpg')
-          h1
-            a(href='/') 自嗨
-          p Lin Yiting's Personal Blog
-        div.sidebar-links
-          a.sidebar-link(href='/') <i class="fa fa-home"></i> Home
-          a.sidebar-link(href='') <i class="fa fa-user"></i> About Me
-          a.sidebar-link(href='/blogs') <i class="fa fa-rss"></i> Blogs
-          a.sidebar-link(href='') <i class="fa fa-comments"></i> Comments
-          a.sidebar-link(href='/tags') <i class="fa fa-tags"></i> Tags
-          //- a.sidebar-link(href='/create') Create a new blog
-      div.main
+        div#header-title
+            a(href='/') 
+              span(style="color: #4285F4") z
+              span(style="color: #EA4335") i
+              span(style="color: #4285F4") h
+              span(style="color: #FBBC05") a
+              span(style="color: #34A853") i
+        div#header-links
+          a.header-link(href='') About
+          a.header-link(href='/blogs') Posts
+          a.header-link(href='') Archive
+          a.header-link(href='/tags') Tags
+    div.main
+      div.wrap
         block content
+    footer.footer
+      div.wrap copyright@ linyiting
     script(type='text/javascript' src='/javascripts/jquery-1.11.3.min.js')
     script(type='application/javascript' src='/javascripts/main.js')
     script(type='text/javascript' src='/javascripts/highlight.pack.js')

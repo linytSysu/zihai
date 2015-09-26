@@ -1,7 +1,18 @@
 extends layout
 
 block content
+  div
+    h1 Blogs with tag: #{tagName}
   each blog in blogs
-    div
-      h1 #{blog.title}
-      p #{blog.content}
+    div.blog-block
+      a(href='/blog/#{blog.url}')
+        h1 #{blog.title}
+      !{blog.content}
+      div.blog-infos
+        span.blog-info
+          i.fa.fa-tag
+          each tag in blog.tags
+            a(href='/tag/#{tag.name}')
+              code #{tag.name}
+        span.blog-info
+          <i class='fa fa-calendar'></i> #{blog.updateTime}

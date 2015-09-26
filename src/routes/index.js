@@ -216,10 +216,11 @@ module.exports = function(passport) {
           blog.tags.forEach(function(tag) {
             if (tag.name == tagName) {
               blogsArr.push(blog);
+              blog.content = markdown.toHTML(blog.content);
             }
           });
         });
-        res.render('tag', {blogs: blogsArr});
+        res.render('tag', {tagName: tagName, blogs: blogsArr});
       }
     });
   });

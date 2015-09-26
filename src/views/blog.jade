@@ -5,6 +5,8 @@ block content
     a(href='/blog/#{blog.url}')
       h1 #{blog.title}
     span.blog-info
+      <i class="fa fa-calendar"></i> #{blog.updateTime}
+    span.blog-info
       <i class="fa fa-tag"></i>
       each tag in blog.tags
         a(href='/tag/#{tag.name}')
@@ -13,8 +15,6 @@ block content
       span.blog-info
         <i class="fa fa-pencil-square-o"></i>
         a(href='/edit/#{blog.url}') Edit
-    span.blog-info
-      <i class="fa fa-calendar"></i> #{blog.updateTime}
     !{blog.content}
   div.comments-block
     mixin comment_list(comments)
@@ -24,7 +24,6 @@ block content
             div.comment-self
               div.comment-avatar
                 !{comment.email}
-                //- img.comment-avatar(src='http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y&s=50')
               div.comment-name #{comment.name}
               div.comment-time #{comment.updateTime}
               div.comment-content !{comment.content}

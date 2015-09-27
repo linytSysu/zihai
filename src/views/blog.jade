@@ -16,7 +16,7 @@ block content
         <i class="fa fa-pencil-square-o"></i>
         a(href='/edit/#{blog.url}') Edit
     !{blog.content}
-  div.comments-block
+  div.comments-block 评论
     mixin comment_list(comments)
       ul
         each comment in comments
@@ -40,6 +40,6 @@ block content
     br
     input(id='website' name='website' placeholder='Website')
     br
-    textarea(id='content' name='content' rows='15' placeholder='Comment')
+    textarea(id='content' name='content' rows='5' placeholder='Comment')
     br
     input.button(id='comment-submit' type='button' value='submit')

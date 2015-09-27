@@ -94,6 +94,7 @@ function createSubmit() {
     var title = $('#title').val();
     var url = $('#url').val();
     var content = $('#content').val();
+    var preview = $('#preview').val();
     var tagSpans = $('#tags-shower').children('span');
     var tags = new Array();
     for (var i = 0; i < tagSpans.length; i++) {
@@ -106,6 +107,7 @@ function createSubmit() {
         title: title,
         url: url,
         content: content,
+        preview: preview,
         tags: JSON.stringify(tags)
       },
       success: function(data){
@@ -183,7 +185,7 @@ function moveForm(para) {
 
   $('.comment-cancel-button').click(function(event) {
     $('.comment-cancel-button').remove();
-    $('.main').append($('#comment-form'));
+    $('.comments-block').append($('#comment-form'));
     $('input[name="parent_comment"]').val('');
   });
 }

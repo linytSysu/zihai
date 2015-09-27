@@ -5,6 +5,7 @@ BlogSchema = new mongoose.Schema ({
 	author: String,
 	url: String,
 	content: String,
+  preview: String,
 	startDate: Date,
 	updateDate: Date,
 	tags: [{type: mongoose.Schema.Types.ObjectId, ref: 'Tag'}],

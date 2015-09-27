@@ -49,6 +49,7 @@ input,textarea,button {
 }
 
 .blog-block {
+  word-wrap: break-word; 
   margin-top: 2em;
 }
 .blog-info {
@@ -67,9 +68,7 @@ input,textarea,button {
 }
 
 .comments-block {
-  width: 90%;
-  padding: 1em;
-  margin: 0 auto;
+  margin-top: 1em;
   margin-bottom: 1em;
   background-color: rgba(255, 255, 255, 1);
 }
@@ -92,11 +91,10 @@ input,textarea,button {
 }
 .comment-name {
   font-weight: bold;
-  line-height: 1.5;
 }
 .comment-time {
   color: #666;
-  line-height: 2;
+  font-size: 0.8em;
 }
 .comment-content {
   padding-left: 65px;
@@ -164,6 +162,9 @@ input,textarea,button {
     margin-top: 5px;
     margin-right: 15px;
     font-size: 1.8em;
+  }
+  .wrap {
+    padding-left: 10px;
   }
   #header-links {
     height: 0px;

@@ -104,6 +104,7 @@ module.exports = function(passport) {
     var title = req.body.title;
     var url = req.body.url;
     var content = req.body.content;
+    var preview = req.body.preview;
     var tags = JSON.parse(req.body.tags);
     var date = new Date();
     
@@ -126,6 +127,7 @@ module.exports = function(passport) {
                 author    : 'linyiting',
                 url       : url,
                 content   : content,
+                preview   : preview,
                 startDate : date,
                 updateDate: date,
                 tags      : tagsId,
@@ -147,6 +149,7 @@ module.exports = function(passport) {
               author    : 'linyiting',
               url       : url,
               content   : content,
+              preview   : preview,
               startDate : date,
               updateDate: date,
               tags      : tagsId,

@@ -1,8 +1,7 @@
 extends layout
 
 block content
-  div
-    h1 Blogs with tag: #{tagName}
+  h1 Blogs with tag: #{tagName}
   each blog in blogs
     div.blog-block
       a(href='/blog/#{blog.url}')

@@ -4,7 +4,7 @@ block content
   each blog in blogs
     div.blog-block
       a(href='/blog/#{blog.url}')
-        h1 #{blog.title}
+        h1.blog-title #{blog.title}
       div.blog-infos
         span.blog-info
           i.fa.fa-tag
@@ -19,4 +19,7 @@ block content
         //- span.blog-info
         //-   i.fa.fa-comments 
         //-   a(href='/blog/#{blog.url}') #{blog.comments.length} comments
-      !{blog.preview}
+      div.blog-content
+        !{blog.preview}
+        span.read-more
+          a(href='/blog/#{blog.url}') Read  →

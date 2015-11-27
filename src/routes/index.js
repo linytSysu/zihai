@@ -266,12 +266,20 @@ module.exports = function(passport) {
       }
     );
   });
+  router.get('/archive', function(req, res, next) {
+    // sort according the date
+    Blog.find({}).select('title url updateDate').sort({updateDate: -1}).exec(function(err, docs) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render('archive', {blogs: docs });
+      }
+    });
+  });
   return router.get('/admin', function(req, res, next) {
     
   });
 }
-
-
 
 // 1. 对于path中的变量，均可以使用req.params.xxxxx方法
 // 2. 对于get请求的?xxxx=,使用req.query.xxxxx方法

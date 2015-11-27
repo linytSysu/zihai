@@ -25,7 +25,7 @@ BlogSchema.virtual('updateTime').get(function() {
   minute = this.updateDate.getMinutes() >= 10
     ? this.updateDate.getMinutes() + ""
     : "0" + this.updateDate.getMinutes();
-  return this.updateDate.getFullYear() + "/" + month + "/" + date + " " + hour + ":" + minute;
+  return this.updateDate.getFullYear() + "-" + month + "-" + date + " " + hour + ":" + minute;
 });
 
 module.exports = mongoose.model('Blog', BlogSchema);

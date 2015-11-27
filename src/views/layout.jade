@@ -9,8 +9,9 @@ html
     link(rel='stylesheet' href='/stylesheets/railscasts.css')
     link(rel='stylesheet' href='/stylesheets/monokai_sublime.css')
     link(rel='stylesheet' href='/stylesheets/style.css')
+    link(href='//fonts.lug.ustc.edu.cn/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:600,900|Crimson+Text:700italic,600,600italic,400,700,400italic' rel='stylesheet' type='text/css')
   body
-    div.header
+    header.header
       div.wrap
         div#menu-button
           <i id="menu-button-icon" class="fa fa-bars"></i>
@@ -22,11 +23,11 @@ html
               span(style="color: #FBBC05") a
               span(style="color: #34A853") i
         div#header-links
-          a.header-link(href='') About
-          a.header-link(href='/blogs') Posts
-          a.header-link(href='') Archive
-          a.header-link(href='/tags') Tags
-          a.header-link(href='/create') Create
+          a(href='') About
+          a(href='/blogs') Posts
+          a(href='/archive') Archive
+          a(href='/tags') Tags
+          a(href='/create') Create
     div.main
       div.wrap
         block content

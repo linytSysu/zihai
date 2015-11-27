@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  div
+    h1.archive-year 2015
+    each blog in blogs
+      div
+        span.archive-time #{blog.updateTime}
+        span.archive-title
+          a(href="/blog/#{blog.url}") #{blog.title}
+
+//-    - 2015-09-12
+       |
+       - 2015-09-09
+       |
+       - 2015-08-08

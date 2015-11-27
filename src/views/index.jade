@@ -4,7 +4,7 @@ block content
   each blog in blogs
     div.blog-block
       a(href='/blog/#{blog.url}')
-        h1 #{blog.title}
+        h1.blog-title #{blog.title}
       div.blog-infos
         span.blog-info
           i.fa.fa-tag
@@ -13,5 +13,7 @@ block content
               code #{tag.name}
         span.blog-info
           <i class='fa fa-calendar'></i> #{blog.updateTime}
-      !{blog.preview}
-
+      div.blog-content
+        !{blog.preview}
+        span.read-more
+          a(href='/blog/#{blog.url}') Read  →

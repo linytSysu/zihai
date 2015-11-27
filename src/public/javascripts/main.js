@@ -31,6 +31,7 @@ function addTag() {
       return function() {
         if ( tagCanAdded($(tagItems[i]).text()) ) {
           $('#tags-shower').append("<span class='added-tag'>"+$(tagItems[i]).text()+"</span>");
+          $('#tags').width($('#tags-editor').width()-$('#tags-shower').width()-10);
           $(tagItems[i]).remove();
         }
       }
@@ -150,7 +151,7 @@ function highlight() {
     var lang = content.split('\n')[0];
     content = content.replace(lang+'\n', '');
     $(codeBlock[i]).text(content);
-    $(codeBlock[i]).addClass(lang).addClass('monokai_sublime');
+    $(codeBlock[i]).addClass(lang).addClass('railscasts');
   }
 }
 

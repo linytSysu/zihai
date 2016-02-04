@@ -258,8 +258,10 @@ module.exports = function(passport) {
           Comment.findOneAndUpdate({_id: targetComment}, {$push: {childrenComment: obj._id}}, function(err, obj2) {
             if (obj2) {
               Comment.findOneAndUpdate({_id: obj._id}, {$set: {level: obj2.level+1}}, function() {
-                res.send('hello world');
+                res.send('created');
               });
+            } else {
+                res.send('created');
             }
           });
         }

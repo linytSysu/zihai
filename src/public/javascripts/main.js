@@ -23,7 +23,8 @@ function showTags() {
       });
     }
   });
-}
+};
+
 function addTag() {
   var tagItems = $('.tag-item');
   for (var i = 0; i < tagItems.length; i++) {
@@ -37,7 +38,8 @@ function addTag() {
       }
     }(i));
   }
-}
+};
+
 function checkTagInput() {
   $('#tags').keydown(function(event) {
     if (event.keyCode == 13 || event.keyCode == 32) {
@@ -66,10 +68,12 @@ function checkTagInput() {
       $('#tags').val('');
     }
   });
-}
+};
+
 function getAddedTagsNumber() {
   return $('#tags-shower').children('span').length;
-}
+};
+
 /**
  * Check whether if the tag can be added according the content
  * @param  {[String]} content
@@ -86,9 +90,7 @@ function tagCanAdded(content) {
     }
   }
   return true;
-}
-
-
+};
 
 function createSubmit() {
   $('#create-submit').click(function(event) {
@@ -116,7 +118,7 @@ function createSubmit() {
       }
     });
   });
-}
+};
 
 function commentSubmit() {
   $('#comment-submit').click(function(event) {
@@ -142,7 +144,7 @@ function commentSubmit() {
       }
     });
   });
-}
+};
 
 function highlight() {
   var codeBlock = $('pre code');
@@ -153,7 +155,7 @@ function highlight() {
     $(codeBlock[i]).text(content);
     $(codeBlock[i]).addClass(lang).addClass('railscasts');
   }
-}
+};
 
 function showMenu() {
   var autoHeight = '170px';
@@ -173,13 +175,10 @@ function showMenu() {
       });
     }
   });
-}
+};
 
 function moveForm(para) {
   $('.comment-cancel-button').remove();
-  // console.log($('.comment-cancel-button').length);
-  // $('#'+para).append($('#comment-form'));
-  // console.log();
   $('#comment-form').insertAfter($('#'+para+' .comment-self')[0]);
   $('#comment-form').prepend('<span class="comment-cancel-button"><i class="fa fa-remove"></i></span>');
   $('input[name="parent_comment"]').val(para);
@@ -189,4 +188,4 @@ function moveForm(para) {
     $('.comments-block').append($('#comment-form'));
     $('input[name="parent_comment"]').val('');
   });
-}
+};

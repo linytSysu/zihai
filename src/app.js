@@ -5,8 +5,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var passport = require('passport');
 var expressSession = require('express-session');
 var flash = require('connect-flash');
 
@@ -30,14 +28,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(expressSession({secret: 'mySecretKey', resave: true, saveUninitialized: true}));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(flash());
 
-var initPassport = require('./passport/init');
-initPassport(passport);
 
-var routes = require('./routes/index')(passport);
+var routes = require('./routes/index');
 // var users = require('./routes/users');
 
 app.use('/', routes);

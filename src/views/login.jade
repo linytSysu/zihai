@@ -6,13 +6,12 @@ html
     title 自嗨| My Personal Page
     link(rel='stylesheet' href='/stylesheets/style.css')
   body
-    div.container
-      div.account-wall
-        form.login-form(class='ui form form-signin', action='/login', method='POST')
-          div.field
-            label Username
-            input(type='text', name='username' class='form-control', required, autofocus)
-          div.field
-            label Password
-            input(type='password', name='password' class='form-control', required)
-          button(type='submit') Sign in
+    div.account-wall
+      form.login-form(action='/login', method='POST')
+        div.field
+          label Username
+          input(type='text', name='username', required, autofocus)
+        div.field
+          label Password
+          input(type='password', name='password', required)
+        button.button(type='submit') Sign in

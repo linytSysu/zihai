@@ -22,16 +22,17 @@ ul {
 }
 pre code{
   border-radius: 6px !important;
-  /*border: 3px solid #ccc !important;*/
   line-height: 1.5;
 }
 input,textarea,button {
   padding: 8px;
   border: 1px solid #ccc;
   box-shadow: 0 1px 2px rgba(0,0,0,0.1) inset;
+  display: block;
 }
 input, textarea {
   font-size: 16px;
+  margin: 10px auto;
   font-family: Menlo, 'Ubuntu Mono', Consolas, 'Courier New', 'Microsoft Yahei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif;
 }
 .header {
@@ -125,9 +126,28 @@ input, textarea {
 .comment-reply {
   padding-left: 65px;
 }
-.comment-cancel-button {
+#comment-form {
+  border: 1px #ddd solid;
+  margin-bottom: 5px;
+}
+#comment-form input, #comment-form textarea {
+  width: 88%;
+}
+input#comment-submit {
+  width: 80px;
   cursor: pointer;
-  float: right;
+}
+
+.comment-cancel-button {
+  display: inline-block;
+  width: 100%;
+  font-size: 20px;
+  cursor: pointer;
+}
+.comment-cancel-button i {
+    margin-top: 5px;
+    margin-right: 5px;
+    float: right;
 }
 
 .edit-form {
@@ -136,15 +156,12 @@ input, textarea {
 }
 .edit-form textarea {
   border-radius: 4px;
-  margin-bottom: 20px;
   width: 90%;
 }
 input#title, input#url {
-  /*float: left;*/
   padding: 10px 8px;
   border-radius: 4px;
   width: 90%;
-  margin-bottom: 20px;
 }
 #tags-editor {
   padding: 8px;
@@ -187,6 +204,27 @@ input#title, input#url {
 }
 .archive-title {
   text-decoration: underline;
+}
+
+.account-wall {
+    margin: 0 auto;
+    width: 300px;
+    height: 320px;
+}
+/*.login-form {
+    border: 1px #ddd solid;
+}*/
+.login-form button {
+    margin: 0 auto;
+}
+.field input {
+    width: 90%;
+}
+
+@media(max-width: 320px) {
+    .account-wall {
+        width: 90%;
+    }
 }
 
 @media(min-width: 751px) {

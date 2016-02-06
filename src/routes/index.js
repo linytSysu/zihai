@@ -29,20 +29,6 @@ router.get('/', function(req, res, next) {
   });
 });
 
-/* GET all blogs */
-router.get('/blogs', function(req, res, next) {
-  Blog.find({}).populate({path: 'tags'}).exec(function(err, blogs) {
-    if (err) {
-      console.log('error');
-    } else {
-      blogs.forEach(function(blog){
-        blog.content = markdown.toHTML(blog.content);
-      });
-      res.render('blogs', {blogs: blogs});
-    }
-  });
-});
-
 router.get('/blog/:name', function(req, res, next) {
   Blog.findOne({url: req.params.name}).populate({path: 'tags'}).exec(function(err, blog) {
     if (err) {

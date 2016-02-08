@@ -1,10 +1,12 @@
 extends layout
 
-block content
-  div
-    h1.archive-year 2015
-    each blog in blogs
-      div
-        span.archive-time #{blog.updateTime}
-        span.archive-title
-          a(href="/blog/#{blog.url}") #{blog.title}
+block content 
+  mixin archive(archive_blogs)
+    each value, index in archive_blogs
+      h1 #{index}
+      each blog in value
+        div
+          span.archive-time #{blog.updateTime}
+          span.archive-title
+            a(href="/blog/#{blog.url}") #{blog.title}
+  +archive(archive_blogs)

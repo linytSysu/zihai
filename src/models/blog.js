@@ -11,6 +11,10 @@ BlogSchema = new mongoose.Schema ({
 	tags: [{type: mongoose.Schema.Types.ObjectId, ref: 'Tag'}],
 });
 
+BlogSchema.virtual('updateYear').get(function() {
+  return this.updateDate.getFullYear();
+});
+
 BlogSchema.virtual('updateTime').get(function() {
   var month, date, hour, minute;
   month = this.updateDate.getMonth() + 1 >= 10

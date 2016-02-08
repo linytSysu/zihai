@@ -114,7 +114,7 @@ function createSubmit() {
         tags: JSON.stringify(tags)
       },
       success: function(data){
-        // console.log(data);
+        window.location = data;
       }
     });
   });

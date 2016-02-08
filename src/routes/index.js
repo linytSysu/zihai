@@ -101,7 +101,7 @@ router.post('/create', isAuthenticated, function(req, res, next) {
               if(err) {
                 console.log(err);
               } else {
-                res.redirect('/blog/'+url);
+                res.send('/blog/'+url);
               }
             });
           }
@@ -123,7 +123,7 @@ router.post('/create', isAuthenticated, function(req, res, next) {
             if(err) {
               console.log(err);
             } else {
-              res.redirect('/blog/'+url);
+                res.send('/blog/'+url);
             }
           }); 
         }
@@ -238,7 +238,16 @@ router.get('/archive', function(req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      res.render('archive', {blogs: docs });
+      var blogs2015 = new Array();
+      var blogs2016 = new Array();
+      for (var index in docs) {
+        if(docs[index].updateYear == 2015) {
+            blogs2015.push(docs[index]);
+        } else if (docs[index].updateYear == 2016) {
+            blogs2016.push(docs[index]);
+        }
+      }
+      res.render('archive', {archive_blogs: {'2016': blogs2016, '2015': blogs2015} });
     }
   });
 });

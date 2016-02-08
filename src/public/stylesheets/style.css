@@ -165,7 +165,8 @@ input#title, input#url {
 }
 #tags-editor {
   padding: 8px;
-  width: 70%;
+ margin-left: 3.5%; 
+  width: 80%;
   border: 1px solid #ccc;
 }
 #tags-editor input {
@@ -178,9 +179,10 @@ input#title, input#url {
 #show-tags {
   float: left;
   margin-top: -40px;
-  margin-left: 75%;
+  margin-left: 88%;
 }
 #tags-block {
+  margin-left: 3.5%;
   margin-top: 10px;
 }
 .tag-item {

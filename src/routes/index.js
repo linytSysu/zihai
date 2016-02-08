@@ -85,7 +85,7 @@ router.post('/create', isAuthenticated, function(req, res, next) {
       if (err) {
         Tag.findOne({name: tagName}, function(err2, obj2) {
           tagsId.push(obj2._id);
-          // Tag.update({name: tagName}, {$inc: {refTimes: 1}}, function(err3, info){});
+          Tag.update({name: tagName}, {$inc: {refTimes: 1}}, function(err3, info){});
           if (tagName == tags[tags.length-1]) {
             var newBlog = new Blog({
               title     : title,

@@ -1,15 +1,13 @@
 extends layout
 
 block content
-  //- form.edit-form(action='/create' method='post')
   div.edit-form
     input(id='title' type='text' name='title' placeholder='标题' required)
     input(id='url' type='text' name='url' placeholder='url' required)
     textarea(id='content' name='content' rows='25' placeholder='content' required)
-    //- button.button(type='button') Preview
     textarea(id='preview' name='preview' rows='5' placeholder='preview' required)
     div#tags-editor
       span#tags-shower
       input(id='tags' type='text' name='tags')
     a(id='show-tags' href='#tags') choose a tag
-    input.button(id='create-submit' type='button' value='submit' required)
+    input.button(id='create-submit' type='button' value='submit')

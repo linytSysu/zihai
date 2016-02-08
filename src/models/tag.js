@@ -14,7 +14,7 @@ TagSchema.pre('save', function(next) {
       if (!objs.length) {
         next();
       } else {
-            next(new Error("Tag exists!"));
+        next(new Error("Tag exists!"));
       }
     });
 });

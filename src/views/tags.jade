@@ -1,6 +1,6 @@
 extends layout
 
 block content
-  each tag, index in tags
+  each tag in tags
     div
-      a(href='/tag/#{tag.name}') #{tag.name} #{index}
+      a(href='/tag/#{tag.name}') #{tag.name} #{tag.refTimes}

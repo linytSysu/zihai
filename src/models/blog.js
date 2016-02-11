@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 
 BlogSchema = new mongoose.Schema ({
-	title: String,
-	author: String,
-	url: String,
-	content: String,
+  title: String,
+  author: String,
+  url: String,
+  content: String,
   preview: String,
-	startDate: Date,
-	updateDate: Date,
-	tags: [{type: mongoose.Schema.Types.ObjectId, ref: 'Tag'}],
+  startDate: Date,
+  updateDate: Date,
+  tags: [{type: mongoose.Schema.Types.ObjectId, ref: 'Tag'}],
 });
 
 BlogSchema.virtual('updateYear').get(function() {

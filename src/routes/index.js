@@ -17,7 +17,7 @@ var isAuthenticated = function(req, res, next) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  Blog.find({}).populate({path: 'tags'}).exec(function(err, blogs) {
+  Blog.find({}).limit(4).populate('tags', 'name').exec(function(err, blogs) {
     if (err) {
       console.log('error');
     } else {
@@ -272,19 +272,22 @@ router.get('/archive', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-   res.render('login'); 
+   res.render('login', {error: req.flash('error').toString()} ); 
 });
 
 router.post('/login', function(req, res, next) {
-  console.log(req.body.username, req.body.password);
-  User.findOne({ username: req.body.username, password: req.body.password}, function(err, user) {
+  User.findOne({ username: req.body.username}, function(err, user) {
     if (!user) {
-        console.log('no such user');
-        res.redirect('/login');
-    } else {
-        req.session.user = user;
-        res.redirect('/');
+        req.flash('error', 'no such user');
+        return res.redirect('/login');
     }
+    console.log(user.password);
+    if (user.password != req.body.password) {
+        req.flash('error', 'incorrect password');
+        return res.redirect('/login');
+    }
+    req.session.user = user;
+    return res.redirect('/');
   });
 });
 

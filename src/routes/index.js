@@ -29,6 +29,26 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/page-([0-9]+)$', function(req, res, next) {
+   var index = req.params['0'];
+   if (index == 0) {
+       return res.send(404);
+   }
+   Blog.find({}).skip(4*(index-1)).limit(4).populate('tags', 'name').exec(function(err, docs) {
+      if (err) {
+          console.log('error');
+      } else {
+          if (docs.length == 0) {
+              return res.send(404);
+          }
+          docs.forEach(function(blog) {
+              blog.content = markdown.toHTML(blog.content);
+          });
+          res.render('index', {blogs: docs});
+      }
+   });
+});
+
 router.get('/blog/:name', function(req, res, next) {
   Blog.findOne({url: req.params.name}).populate({path: 'tags'}).exec(function(err, blog) {
     if (err) {
@@ -233,7 +253,6 @@ router.post('/comment', function(req, res, next) {
 });
 
 router.get('/archive', function(req, res, next) {
-  // sort according the date
   Blog.find({}).select('title url updateDate').sort({updateDate: -1}).exec(function(err, docs) {
     if (err) {
       console.log(err);

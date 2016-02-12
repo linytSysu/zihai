@@ -6,8 +6,6 @@ TagSchema = new mongoose.Schema ({
   refTimes: Number,
 });
 
-var Tag = mongoose.model('Tag', TagSchema);
-
 TagSchema.pre('save', function(next) {
   var self = this;
     Tag.find({name: self.name}, function(err, objs) {
@@ -19,4 +17,5 @@ TagSchema.pre('save', function(next) {
     });
 });
 
+var Tag = mongoose.model('Tag', TagSchema);
 module.exports = Tag;

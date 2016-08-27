@@ -8,11 +8,11 @@ var markdown = require('markdown').markdown;
 var md5 = require('md5');
 
 var isAuthenticated = function(req, res, next) {
-    if (req.session.user) {
-        next();
-    } else {
-        res.redirect('/login');
-    }
+  if (req.session.user) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
 }
 
 /* GET home page. */
@@ -30,23 +30,23 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/page-([0-9]+)$', function(req, res, next) {
-   var index = req.params['0'];
-   if (index == 0) {
-       return res.send(404);
-   }
-   Blog.find({}).skip(4*(index-1)).limit(4).populate('tags', 'name').exec(function(err, docs) {
-      if (err) {
-          console.log('error');
-      } else {
-          if (docs.length == 0) {
-              return res.send(404);
-          }
-          docs.forEach(function(blog) {
-              blog.content = markdown.toHTML(blog.content);
-          });
-          res.render('index', {blogs: docs});
+  var index = req.params['0'];
+  if (index == 0) {
+    return res.send(404);
+  }
+  Blog.find({}).skip(4*(index-1)).limit(4).populate('tags', 'name').exec(function(err, docs) {
+    if (err) {
+      console.log('error');
+    } else {
+      if (docs.length == 0) {
+        return res.send(404);
       }
-   });
+      docs.forEach(function(blog) {
+        blog.content = markdown.toHTML(blog.content);
+      });
+      res.render('index', {blogs: docs});
+    }
+  });
 });
 
 router.get('/blog/:name', function(req, res, next) {
@@ -79,9 +79,9 @@ router.get('/create', isAuthenticated, function(req, res, next) {
 router.get('/edit/:name', function(req, res, next) {
   Blog.findOne({url: req.params.name}).populate({path: 'tags'}).exec(function(err, blog) {
     if (err) {
-        console.log('error');
+      console.log('error');
     } else {
-        res.render('edit', { blog: blog });
+      res.render('edit', { blog: blog });
     }
   });
 });
@@ -143,7 +143,7 @@ router.post('/create', isAuthenticated, function(req, res, next) {
             if(err) {
               console.log(err);
             } else {
-                res.send('/blog/'+url);
+              res.send('/blog/'+url);
             }
           }); 
         }
@@ -241,7 +241,7 @@ router.post('/comment', function(req, res, next) {
         Comment.findOneAndUpdate({_id: targetComment}, {$push: {childrenComment: obj._id}}, function(err, obj2) {
           if (obj2) {
             Comment.findOneAndUpdate({_id: obj._id}, {$set: {level: obj2.level+1}}, function() {
-               res.send('created');
+              res.send('created');
             });
           } else {
             res.send('created');
@@ -261,9 +261,9 @@ router.get('/archive', function(req, res, next) {
       var blogs2016 = new Array();
       for (var index in docs) {
         if(docs[index].updateYear == 2015) {
-            blogs2015.push(docs[index]);
+          blogs2015.push(docs[index]);
         } else if (docs[index].updateYear == 2016) {
-            blogs2016.push(docs[index]);
+          blogs2016.push(docs[index]);
         }
       }
       res.render('archive', {archive_blogs: {'2016': blogs2016, '2015': blogs2015} });
@@ -272,19 +272,19 @@ router.get('/archive', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-   res.render('login', {error: req.flash('error').toString()} ); 
+  res.render('login', {error: req.flash('error').toString()} ); 
 });
 
 router.post('/login', function(req, res, next) {
   User.findOne({ username: req.body.username}, function(err, user) {
     if (!user) {
-        req.flash('error', 'no such user');
-        return res.redirect('/login');
+      req.flash('error', 'no such user');
+      return res.redirect('/login');
     }
     console.log(user.password);
     if (user.password != req.body.password) {
-        req.flash('error', 'incorrect password');
-        return res.redirect('/login');
+      req.flash('error', 'incorrect password');
+      return res.redirect('/login');
     }
     req.session.user = user;
     return res.redirect('/');
@@ -292,8 +292,8 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/logout', function(req, res, next) {
-   req.session.destroy();
-   res.redirect('/'); 
+  req.session.destroy();
+  res.redirect('/');
 });
 
 module.exports = router;
